@@ -56,7 +56,7 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/Bonjour.jsp").forward(request, response);   //lance la vue bonjour
     }
 
     /**
