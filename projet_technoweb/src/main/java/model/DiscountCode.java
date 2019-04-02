@@ -1,7 +1,7 @@
 package model;
 
 /**
- *
+ * enregistrement de la table DISCOUNT_CODE
  * @author cperrinc
  */
 public class DiscountCode {
