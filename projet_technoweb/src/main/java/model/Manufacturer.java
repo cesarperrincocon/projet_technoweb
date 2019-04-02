@@ -7,6 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -119,5 +120,40 @@ public class Manufacturer implements Serializable {
     public void setRep(String rep) {
         this.rep = rep;
     }
+    
+    @XmlTransient
+    public Collection<Product> getProductCollection() {
+        return productCollection;
+    }
+
+    public void setProductCollection(Collection<Product> productCollection) {
+        this.productCollection = productCollection;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (manufacturerId != null ? manufacturerId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Manufacturer)) {
+            return false;
+        }
+        Manufacturer other = (Manufacturer) object;
+        if ((this.manufacturerId == null && other.manufacturerId != null) || (this.manufacturerId != null && !this.manufacturerId.equals(other.manufacturerId))) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+        return "model.Manufacturer[ manufacturerId=" + manufacturerId + " ]";
+    }
+    
 
 }
