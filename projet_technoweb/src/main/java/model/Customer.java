@@ -17,7 +17,7 @@ public class Customer {
     public String phoneNumber;
     
     
-    //-----------GETER-----------------
+    //-----------GETTER-----------------
 
     public String getName() {
         return name;
@@ -35,7 +35,7 @@ public class Customer {
         return phoneNumber;    
     }
     
-    //-------------SETER--------------
+    //-------------SETTER--------------
 
     public void setName(String name) {
         this.name = name;
