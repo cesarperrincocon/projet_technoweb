@@ -59,7 +59,7 @@ public class Product implements Serializable {
     private Collection<PurchaseOrder> purchaseOrderCollection;
     @JoinColumn(name = "MANUFACTURER_ID", referencedColumnName = "MANUFACTURER_ID")
     @ManyToOne(optional = false)
-    private Manufacturer_1 manufacturerId;
+    private Manufacturer manufacturerId;
     @JoinColumn(name = "PRODUCT_CODE", referencedColumnName = "PROD_CODE")
     @ManyToOne(optional = false)
     private ProductCode productCode;
@@ -128,11 +128,11 @@ public class Product implements Serializable {
         this.purchaseOrderCollection = purchaseOrderCollection;
     }
 
-    public Manufacturer_1 getManufacturerId() {
+    public Manufacturer getManufacturerId() {
         return manufacturerId;
     }
 
-    public void setManufacturerId(Manufacturer_1 manufacturerId) {
+    public void setManufacturerId(Manufacturer manufacturerId) {
         this.manufacturerId = manufacturerId;
     }
 
