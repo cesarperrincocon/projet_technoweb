@@ -27,12 +27,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "MICRO_MARKET")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "MicroMarket_1.findAll", query = "SELECT m FROM MicroMarket_1 m")
-    , @NamedQuery(name = "MicroMarket_1.findByZipCode", query = "SELECT m FROM MicroMarket_1 m WHERE m.zipCode = :zipCode")
-    , @NamedQuery(name = "MicroMarket_1.findByRadius", query = "SELECT m FROM MicroMarket_1 m WHERE m.radius = :radius")
-    , @NamedQuery(name = "MicroMarket_1.findByAreaLength", query = "SELECT m FROM MicroMarket_1 m WHERE m.areaLength = :areaLength")
-    , @NamedQuery(name = "MicroMarket_1.findByAreaWidth", query = "SELECT m FROM MicroMarket_1 m WHERE m.areaWidth = :areaWidth")})
-public class MicroMarket_1 implements Serializable {
+    @NamedQuery(name = "MicroMarket.findAll", query = "SELECT m FROM MicroMarket m")
+    , @NamedQuery(name = "MicroMarket.findByZipCode", query = "SELECT m FROM MicroMarket m WHERE m.zipCode = :zipCode")
+    , @NamedQuery(name = "MicroMarket.findByRadius", query = "SELECT m FROM MicroMarket m WHERE m.radius = :radius")
+    , @NamedQuery(name = "MicroMarket.findByAreaLength", query = "SELECT m FROM MicroMarket m WHERE m.areaLength = :areaLength")
+    , @NamedQuery(name = "MicroMarket.findByAreaWidth", query = "SELECT m FROM MicroMarket m WHERE m.areaWidth = :areaWidth")})
+public class MicroMarket implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,12 +47,12 @@ public class MicroMarket_1 implements Serializable {
     @Column(name = "AREA_WIDTH")
     private Double areaWidth;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "zip")
-    private Collection<Customer_1> customerCollection;
+    private Collection<Customer> customerCollection;
 
-    public MicroMarket_1() {
+    public MicroMarket() {
     }
 
-    public MicroMarket_1(String zipCode) {
+    public MicroMarket(String zipCode) {
         this.zipCode = zipCode;
     }
 
@@ -89,11 +89,11 @@ public class MicroMarket_1 implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Customer_1> getCustomerCollection() {
+    public Collection<Customer> getCustomerCollection() {
         return customerCollection;
     }
 
-    public void setCustomerCollection(Collection<Customer_1> customerCollection) {
+    public void setCustomerCollection(Collection<Customer> customerCollection) {
         this.customerCollection = customerCollection;
     }
 
@@ -107,10 +107,10 @@ public class MicroMarket_1 implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MicroMarket_1)) {
+        if (!(object instanceof MicroMarket)) {
             return false;
         }
-        MicroMarket_1 other = (MicroMarket_1) object;
+        MicroMarket other = (MicroMarket) object;
         if ((this.zipCode == null && other.zipCode != null) || (this.zipCode != null && !this.zipCode.equals(other.zipCode))) {
             return false;
         }
@@ -119,7 +119,7 @@ public class MicroMarket_1 implements Serializable {
 
     @Override
     public String toString() {
-        return "model.MicroMarket_1[ zipCode=" + zipCode + " ]";
+        return "model.MicroMarket[ zipCode=" + zipCode + " ]";
     }
     
 }

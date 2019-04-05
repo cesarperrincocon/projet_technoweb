@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "DISCOUNT_CODE")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "DiscountCode_1.findAll", query = "SELECT d FROM DiscountCode_1 d")
-    , @NamedQuery(name = "DiscountCode_1.findByDiscountCode", query = "SELECT d FROM DiscountCode_1 d WHERE d.discountCode = :discountCode")
-    , @NamedQuery(name = "DiscountCode_1.findByRate", query = "SELECT d FROM DiscountCode_1 d WHERE d.rate = :rate")})
-public class DiscountCode_1 implements Serializable {
+    @NamedQuery(name = "DiscountCode.findAll", query = "SELECT d FROM DiscountCode d")
+    , @NamedQuery(name = "DiscountCode.findByDiscountCode", query = "SELECT d FROM DiscountCode d WHERE d.discountCode = :discountCode")
+    , @NamedQuery(name = "DiscountCode.findByRate", query = "SELECT d FROM DiscountCode d WHERE d.rate = :rate")})
+public class DiscountCode implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,12 +42,12 @@ public class DiscountCode_1 implements Serializable {
     @Column(name = "RATE")
     private BigDecimal rate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "discountCode")
-    private Collection<Customer_1> customerCollection;
+    private Collection<Customer> customerCollection;
 
-    public DiscountCode_1() {
+    public DiscountCode() {
     }
 
-    public DiscountCode_1(String discountCode) {
+    public DiscountCode(String discountCode) {
         this.discountCode = discountCode;
     }
 
@@ -68,11 +68,11 @@ public class DiscountCode_1 implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Customer_1> getCustomerCollection() {
+    public Collection<Customer> getCustomerCollection() {
         return customerCollection;
     }
 
-    public void setCustomerCollection(Collection<Customer_1> customerCollection) {
+    public void setCustomerCollection(Collection<Customer> customerCollection) {
         this.customerCollection = customerCollection;
     }
 
@@ -86,10 +86,10 @@ public class DiscountCode_1 implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DiscountCode_1)) {
+        if (!(object instanceof DiscountCode)) {
             return false;
         }
-        DiscountCode_1 other = (DiscountCode_1) object;
+        DiscountCode other = (DiscountCode) object;
         if ((this.discountCode == null && other.discountCode != null) || (this.discountCode != null && !this.discountCode.equals(other.discountCode))) {
             return false;
         }
@@ -98,7 +98,7 @@ public class DiscountCode_1 implements Serializable {
 
     @Override
     public String toString() {
-        return "model.DiscountCode_1[ discountCode=" + discountCode + " ]";
+        return "model.DiscountCode[ discountCode=" + discountCode + " ]";
     }
     
 }

@@ -30,14 +30,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "PRODUCT")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product_1.findAll", query = "SELECT p FROM Product_1 p")
-    , @NamedQuery(name = "Product_1.findByProductId", query = "SELECT p FROM Product_1 p WHERE p.productId = :productId")
-    , @NamedQuery(name = "Product_1.findByPurchaseCost", query = "SELECT p FROM Product_1 p WHERE p.purchaseCost = :purchaseCost")
-    , @NamedQuery(name = "Product_1.findByQuantityOnHand", query = "SELECT p FROM Product_1 p WHERE p.quantityOnHand = :quantityOnHand")
-    , @NamedQuery(name = "Product_1.findByMarkup", query = "SELECT p FROM Product_1 p WHERE p.markup = :markup")
-    , @NamedQuery(name = "Product_1.findByAvailable", query = "SELECT p FROM Product_1 p WHERE p.available = :available")
-    , @NamedQuery(name = "Product_1.findByDescription", query = "SELECT p FROM Product_1 p WHERE p.description = :description")})
-public class Product_1 implements Serializable {
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
+    , @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId")
+    , @NamedQuery(name = "Product.findByPurchaseCost", query = "SELECT p FROM Product p WHERE p.purchaseCost = :purchaseCost")
+    , @NamedQuery(name = "Product.findByQuantityOnHand", query = "SELECT p FROM Product p WHERE p.quantityOnHand = :quantityOnHand")
+    , @NamedQuery(name = "Product.findByMarkup", query = "SELECT p FROM Product p WHERE p.markup = :markup")
+    , @NamedQuery(name = "Product.findByAvailable", query = "SELECT p FROM Product p WHERE p.available = :available")
+    , @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description")})
+public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,18 +56,18 @@ public class Product_1 implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
-    private Collection<PurchaseOrder_1> purchaseOrderCollection;
+    private Collection<PurchaseOrder> purchaseOrderCollection;
     @JoinColumn(name = "MANUFACTURER_ID", referencedColumnName = "MANUFACTURER_ID")
     @ManyToOne(optional = false)
-    private Manufacturer_1 manufacturerId;
+    private Manufacturer manufacturerId;
     @JoinColumn(name = "PRODUCT_CODE", referencedColumnName = "PROD_CODE")
     @ManyToOne(optional = false)
     private ProductCode productCode;
 
-    public Product_1() {
+    public Product() {
     }
 
-    public Product_1(Integer productId) {
+    public Product(Integer productId) {
         this.productId = productId;
     }
 
@@ -120,19 +120,19 @@ public class Product_1 implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PurchaseOrder_1> getPurchaseOrderCollection() {
+    public Collection<PurchaseOrder> getPurchaseOrderCollection() {
         return purchaseOrderCollection;
     }
 
-    public void setPurchaseOrderCollection(Collection<PurchaseOrder_1> purchaseOrderCollection) {
+    public void setPurchaseOrderCollection(Collection<PurchaseOrder> purchaseOrderCollection) {
         this.purchaseOrderCollection = purchaseOrderCollection;
     }
 
-    public Manufacturer_1 getManufacturerId() {
+    public Manufacturer getManufacturerId() {
         return manufacturerId;
     }
 
-    public void setManufacturerId(Manufacturer_1 manufacturerId) {
+    public void setManufacturerId(Manufacturer manufacturerId) {
         this.manufacturerId = manufacturerId;
     }
 
@@ -154,10 +154,10 @@ public class Product_1 implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Product_1)) {
+        if (!(object instanceof Product)) {
             return false;
         }
-        Product_1 other = (Product_1) object;
+        Product other = (Product) object;
         if ((this.productId == null && other.productId != null) || (this.productId != null && !this.productId.equals(other.productId))) {
             return false;
         }
@@ -166,7 +166,7 @@ public class Product_1 implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Product_1[ productId=" + productId + " ]";
+        return "model.Product[ productId=" + productId + " ]";
     }
     
 }

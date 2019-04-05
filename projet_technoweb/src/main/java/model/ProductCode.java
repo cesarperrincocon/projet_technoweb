@@ -44,7 +44,7 @@ public class ProductCode implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productCode")
-    private Collection<Product_1> productCollection;
+    private Collection<Product> productCollection;
 
     public ProductCode() {
     }
@@ -83,11 +83,11 @@ public class ProductCode implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Product_1> getProductCollection() {
+    public Collection<Product> getProductCollection() {
         return productCollection;
     }
 
-    public void setProductCollection(Collection<Product_1> productCollection) {
+    public void setProductCollection(Collection<Product> productCollection) {
         this.productCollection = productCollection;
     }
 

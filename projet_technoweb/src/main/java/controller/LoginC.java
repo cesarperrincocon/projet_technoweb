@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Customer;
 import model.DAO;
 
 /**
@@ -99,10 +100,21 @@ public class LoginC extends HttpServlet {
                 session.setAttribute("userPassword", mdp);
                 session.setAttribute("userPhone", phoneNumber);
                 session.setAttribute("userAddress", adresse);
-                
+
+            } //Si le mdp et le login sont vides
+            else if ("".equals(loginP) || "".equals(mdpP)) { // 
+                request.setAttribute("errorMessage", "Login/Password incorrect");
+            } else {
+                request.setAttribute("errorMessage", "Login/Password incorrect");
             }
 
         }
+
+    }
+
+    private String findCustomer(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        return (session == null) ? null : (String) session.getAttribute("userName");
 
     }
 
