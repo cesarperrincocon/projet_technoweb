@@ -8,15 +8,17 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author cperrinc
+ * @author ejaffre
  */
-public class Controller extends HttpServlet {
+@WebServlet(name = "AdminController", urlPatterns = {"/AdminController"})
+public class AdminC extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +37,10 @@ public class Controller extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controller</title>");            
+            out.println("<title>Servlet AdminController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controller at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +58,7 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/Bonjour.jsp").forward(request, response);   //lance la vue bonjour
+        processRequest(request, response);
     }
 
     /**
