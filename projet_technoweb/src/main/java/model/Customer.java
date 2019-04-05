@@ -140,7 +140,7 @@ public class Customer implements Serializable {
     public String getFax() {
         return fax;
     }
-
+//jj
     public void setFax(String fax) {
         this.fax = fax;
     }
