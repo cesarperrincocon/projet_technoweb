@@ -27,18 +27,18 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "MANUFACTURER")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Manufacturer_1.findAll", query = "SELECT m FROM Manufacturer_1 m")
-    , @NamedQuery(name = "Manufacturer_1.findByManufacturerId", query = "SELECT m FROM Manufacturer_1 m WHERE m.manufacturerId = :manufacturerId")
-    , @NamedQuery(name = "Manufacturer_1.findByName", query = "SELECT m FROM Manufacturer_1 m WHERE m.name = :name")
-    , @NamedQuery(name = "Manufacturer_1.findByAddressline1", query = "SELECT m FROM Manufacturer_1 m WHERE m.addressline1 = :addressline1")
-    , @NamedQuery(name = "Manufacturer_1.findByAddressline2", query = "SELECT m FROM Manufacturer_1 m WHERE m.addressline2 = :addressline2")
-    , @NamedQuery(name = "Manufacturer_1.findByCity", query = "SELECT m FROM Manufacturer_1 m WHERE m.city = :city")
-    , @NamedQuery(name = "Manufacturer_1.findByState", query = "SELECT m FROM Manufacturer_1 m WHERE m.state = :state")
-    , @NamedQuery(name = "Manufacturer_1.findByZip", query = "SELECT m FROM Manufacturer_1 m WHERE m.zip = :zip")
-    , @NamedQuery(name = "Manufacturer_1.findByPhone", query = "SELECT m FROM Manufacturer_1 m WHERE m.phone = :phone")
-    , @NamedQuery(name = "Manufacturer_1.findByFax", query = "SELECT m FROM Manufacturer_1 m WHERE m.fax = :fax")
-    , @NamedQuery(name = "Manufacturer_1.findByEmail", query = "SELECT m FROM Manufacturer_1 m WHERE m.email = :email")
-    , @NamedQuery(name = "Manufacturer_1.findByRep", query = "SELECT m FROM Manufacturer_1 m WHERE m.rep = :rep")})
+    @NamedQuery(name = "Manufacturer.findAll", query = "SELECT m FROM Manufacturer m")
+    , @NamedQuery(name = "Manufacturer.findByManufacturerId", query = "SELECT m FROM Manufacturer m WHERE m.manufacturerId = :manufacturerId")
+    , @NamedQuery(name = "Manufacturer.findByName", query = "SELECT m FROM Manufacturer m WHERE m.name = :name")
+    , @NamedQuery(name = "Manufacturer.findByAddressline1", query = "SELECT m FROM Manufacturer m WHERE m.addressline1 = :addressline1")
+    , @NamedQuery(name = "Manufacturer.findByAddressline2", query = "SELECT m FROM Manufacturer m WHERE m.addressline2 = :addressline2")
+    , @NamedQuery(name = "Manufacturer.findByCity", query = "SELECT m FROM Manufacturer m WHERE m.city = :city")
+    , @NamedQuery(name = "Manufacturer.findByState", query = "SELECT m FROM Manufacturer m WHERE m.state = :state")
+    , @NamedQuery(name = "Manufacturer.findByZip", query = "SELECT m FROM Manufacturer m WHERE m.zip = :zip")
+    , @NamedQuery(name = "Manufacturer.findByPhone", query = "SELECT m FROM Manufacturer m WHERE m.phone = :phone")
+    , @NamedQuery(name = "Manufacturer.findByFax", query = "SELECT m FROM Manufacturer m WHERE m.fax = :fax")
+    , @NamedQuery(name = "Manufacturer.findByEmail", query = "SELECT m FROM Manufacturer m WHERE m.email = :email")
+    , @NamedQuery(name = "Manufacturer.findByRep", query = "SELECT m FROM Manufacturer m WHERE m.rep = :rep")})
 public class Manufacturer implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,12 +67,12 @@ public class Manufacturer implements Serializable {
     @Column(name = "REP")
     private String rep;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturerId")
-    private Collection<Product_1> productCollection;
+    private Collection<Product> productCollection;
 
-    public Manufacturer_1() {
+    public Manufacturer() {
     }
 
-    public Manufacturer_1(Integer manufacturerId) {
+    public Manufacturer(Integer manufacturerId) {
         this.manufacturerId = manufacturerId;
     }
 
@@ -165,11 +165,11 @@ public class Manufacturer implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Product_1> getProductCollection() {
+    public Collection<Product> getProductCollection() {
         return productCollection;
     }
 
-    public void setProductCollection(Collection<Product_1> productCollection) {
+    public void setProductCollection(Collection<Product> productCollection) {
         this.productCollection = productCollection;
     }
 
@@ -183,10 +183,10 @@ public class Manufacturer implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Manufacturer_1)) {
+        if (!(object instanceof Manufacturer)) {
             return false;
         }
-        Manufacturer_1 other = (Manufacturer_1) object;
+        Manufacturer other = (Manufacturer) object;
         if ((this.manufacturerId == null && other.manufacturerId != null) || (this.manufacturerId != null && !this.manufacturerId.equals(other.manufacturerId))) {
             return false;
         }
@@ -195,7 +195,7 @@ public class Manufacturer implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Manufacturer_1[ manufacturerId=" + manufacturerId + " ]";
+        return "model.Manufacturer[ manufacturerId=" + manufacturerId + " ]";
     }
     
 }

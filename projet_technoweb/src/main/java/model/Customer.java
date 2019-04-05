@@ -1,4 +1,4 @@
-/*
+Cu/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -29,17 +29,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CUSTOMER")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Customer_1.findAll", query = "SELECT c FROM Customer_1 c")
-    , @NamedQuery(name = "Customer_1.findByCustomerId", query = "SELECT c FROM Customer_1 c WHERE c.customerId = :customerId")
-    , @NamedQuery(name = "Customer_1.findByName", query = "SELECT c FROM Customer_1 c WHERE c.name = :name")
-    , @NamedQuery(name = "Customer_1.findByAddressline1", query = "SELECT c FROM Customer_1 c WHERE c.addressline1 = :addressline1")
-    , @NamedQuery(name = "Customer_1.findByAddressline2", query = "SELECT c FROM Customer_1 c WHERE c.addressline2 = :addressline2")
-    , @NamedQuery(name = "Customer_1.findByCity", query = "SELECT c FROM Customer_1 c WHERE c.city = :city")
-    , @NamedQuery(name = "Customer_1.findByState", query = "SELECT c FROM Customer_1 c WHERE c.state = :state")
-    , @NamedQuery(name = "Customer_1.findByPhone", query = "SELECT c FROM Customer_1 c WHERE c.phone = :phone")
-    , @NamedQuery(name = "Customer_1.findByFax", query = "SELECT c FROM Customer_1 c WHERE c.fax = :fax")
-    , @NamedQuery(name = "Customer_1.findByEmail", query = "SELECT c FROM Customer_1 c WHERE c.email = :email")
-    , @NamedQuery(name = "Customer_1.findByCreditLimit", query = "SELECT c FROM Customer_1 c WHERE c.creditLimit = :creditLimit")})
+    @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
+    , @NamedQuery(name = "Customer.findByCustomerId", query = "SELECT c FROM Customer c WHERE c.customerId = :customerId")
+    , @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.name = :name")
+    , @NamedQuery(name = "Customer.findByAddressline1", query = "SELECT c FROM Customer c WHERE c.addressline1 = :addressline1")
+    , @NamedQuery(name = "Customer.findByAddressline2", query = "SELECT c FROM Customer c WHERE c.addressline2 = :addressline2")
+    , @NamedQuery(name = "Customer.findByCity", query = "SELECT c FROM Customer c WHERE c.city = :city")
+    , @NamedQuery(name = "Customer.findByState", query = "SELECT c FROM Customer c WHERE c.state = :state")
+    , @NamedQuery(name = "Customer.findByPhone", query = "SELECT c FROM Customer c WHERE c.phone = :phone")
+    , @NamedQuery(name = "Customer.findByFax", query = "SELECT c FROM Customer c WHERE c.fax = :fax")
+    , @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")
+    , @NamedQuery(name = "Customer.findByCreditLimit", query = "SELECT c FROM Customer c WHERE c.creditLimit = :creditLimit")})
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,18 +66,18 @@ public class Customer implements Serializable {
     @Column(name = "CREDIT_LIMIT")
     private Integer creditLimit;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId")
-    private Collection<PurchaseOrder_1> purchaseOrderCollection;
+    private Collection<PurchaseOrder> purchaseOrderCollection;
     @JoinColumn(name = "DISCOUNT_CODE", referencedColumnName = "DISCOUNT_CODE")
     @ManyToOne(optional = false)
-    private DiscountCode_1 discountCode;
+    private DiscountCode discountCode;
     @JoinColumn(name = "ZIP", referencedColumnName = "ZIP_CODE")
     @ManyToOne(optional = false)
-    private MicroMarket_1 zip;
+    private MicroMarket zip;
 
-    public Customer_1() {
+    public Customer() {
     }
 
-    public Customer_1(Integer customerId) {
+    public Customer(Integer customerId) {
         this.customerId = customerId;
     }
 
@@ -162,27 +162,27 @@ public class Customer implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PurchaseOrder_1> getPurchaseOrderCollection() {
+    public Collection<PurchaseOrder> getPurchaseOrderCollection() {
         return purchaseOrderCollection;
     }
 
-    public void setPurchaseOrderCollection(Collection<PurchaseOrder_1> purchaseOrderCollection) {
+    public void setPurchaseOrderCollection(Collection<PurchaseOrder> purchaseOrderCollection) {
         this.purchaseOrderCollection = purchaseOrderCollection;
     }
 
-    public DiscountCode_1 getDiscountCode() {
+    public DiscountCode getDiscountCode() {
         return discountCode;
     }
 
-    public void setDiscountCode(DiscountCode_1 discountCode) {
+    public void setDiscountCode(DiscountCode discountCode) {
         this.discountCode = discountCode;
     }
 
-    public MicroMarket_1 getZip() {
+    public MicroMarket getZip() {
         return zip;
     }
 
-    public void setZip(MicroMarket_1 zip) {
+    public void setZip(MicroMarket zip) {
         this.zip = zip;
     }
 
@@ -196,10 +196,10 @@ public class Customer implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Customer_1)) {
+        if (!(object instanceof Customer)) {
             return false;
         }
-        Customer_1 other = (Customer_1) object;
+        Customer other = (Customer) object;
         if ((this.customerId == null && other.customerId != null) || (this.customerId != null && !this.customerId.equals(other.customerId))) {
             return false;
         }
@@ -208,7 +208,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Customer_1[ customerId=" + customerId + " ]";
+        return "model.Customer[ customerId=" + customerId + " ]";
     }
     
 }

@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "PURCHASE_ORDER")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PurchaseOrder_1.findAll", query = "SELECT p FROM PurchaseOrder_1 p")
-    , @NamedQuery(name = "PurchaseOrder_1.findByOrderNum", query = "SELECT p FROM PurchaseOrder_1 p WHERE p.orderNum = :orderNum")
-    , @NamedQuery(name = "PurchaseOrder_1.findByQuantity", query = "SELECT p FROM PurchaseOrder_1 p WHERE p.quantity = :quantity")
-    , @NamedQuery(name = "PurchaseOrder_1.findByShippingCost", query = "SELECT p FROM PurchaseOrder_1 p WHERE p.shippingCost = :shippingCost")
-    , @NamedQuery(name = "PurchaseOrder_1.findBySalesDate", query = "SELECT p FROM PurchaseOrder_1 p WHERE p.salesDate = :salesDate")
-    , @NamedQuery(name = "PurchaseOrder_1.findByShippingDate", query = "SELECT p FROM PurchaseOrder_1 p WHERE p.shippingDate = :shippingDate")
-    , @NamedQuery(name = "PurchaseOrder_1.findByFreightCompany", query = "SELECT p FROM PurchaseOrder_1 p WHERE p.freightCompany = :freightCompany")})
+    @NamedQuery(name = "PurchaseOrder.findAll", query = "SELECT p FROM PurchaseOrder p")
+    , @NamedQuery(name = "PurchaseOrder.findByOrderNum", query = "SELECT p FROM PurchaseOrder p WHERE p.orderNum = :orderNum")
+    , @NamedQuery(name = "PurchaseOrder.findByQuantity", query = "SELECT p FROM PurchaseOrder p WHERE p.quantity = :quantity")
+    , @NamedQuery(name = "PurchaseOrder.findByShippingCost", query = "SELECT p FROM PurchaseOrder p WHERE p.shippingCost = :shippingCost")
+    , @NamedQuery(name = "PurchaseOrder.findBySalesDate", query = "SELECT p FROM PurchaseOrder p WHERE p.salesDate = :salesDate")
+    , @NamedQuery(name = "PurchaseOrder.findByShippingDate", query = "SELECT p FROM PurchaseOrder p WHERE p.shippingDate = :shippingDate")
+    , @NamedQuery(name = "PurchaseOrder.findByFreightCompany", query = "SELECT p FROM PurchaseOrder p WHERE p.freightCompany = :freightCompany")})
 public class PurchaseOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,15 +58,15 @@ public class PurchaseOrder implements Serializable {
     private String freightCompany;
     @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "CUSTOMER_ID")
     @ManyToOne(optional = false)
-    private Customer_1 customerId;
+    private Customer customerId;
     @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")
     @ManyToOne(optional = false)
-    private Product_1 productId;
+    private Product productId;
 
-    public PurchaseOrder_1() {
+    public PurchaseOrder() {
     }
 
-    public PurchaseOrder_1(Integer orderNum) {
+    public PurchaseOrder(Integer orderNum) {
         this.orderNum = orderNum;
     }
 
@@ -118,19 +118,19 @@ public class PurchaseOrder implements Serializable {
         this.freightCompany = freightCompany;
     }
 
-    public Customer_1 getCustomerId() {
+    public Customer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Customer_1 customerId) {
+    public void setCustomerId(Customer customerId) {
         this.customerId = customerId;
     }
 
-    public Product_1 getProductId() {
+    public Product getProductId() {
         return productId;
     }
 
-    public void setProductId(Product_1 productId) {
+    public void setProductId(Product productId) {
         this.productId = productId;
     }
 
@@ -144,10 +144,10 @@ public class PurchaseOrder implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PurchaseOrder_1)) {
+        if (!(object instanceof PurchaseOrder)) {
             return false;
         }
-        PurchaseOrder_1 other = (PurchaseOrder_1) object;
+        PurchaseOrder other = (PurchaseOrder) object;
         if ((this.orderNum == null && other.orderNum != null) || (this.orderNum != null && !this.orderNum.equals(other.orderNum))) {
             return false;
         }
@@ -156,7 +156,7 @@ public class PurchaseOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "model.PurchaseOrder_1[ orderNum=" + orderNum + " ]";
+        return "model.PurchaseOrder[ orderNum=" + orderNum + " ]";
     }
     
 }
