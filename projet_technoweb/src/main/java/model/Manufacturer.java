@@ -15,7 +15,10 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 public class Manufacturer implements Serializable {
 
+    //The serialVersionUID is a universal version identifier for a Serializable class
     private static final long serialVersionUID = 1L;
+    
+    //Déclaration de variables
     private Integer manufacturerId;
     private String name;
     private String addressline1;
@@ -40,7 +43,7 @@ public class Manufacturer implements Serializable {
     public void setManufacturerId(Integer manufacturerId) {
         this.manufacturerId = manufacturerId;
     }
-
+//Accesseurs et Modificateurs
     public String getName() {
         return name;
     }
@@ -121,6 +124,7 @@ public class Manufacturer implements Serializable {
         this.rep = rep;
     }
     
+    //Resolve name collision between JavaBean property and field name 
     @XmlTransient
     public Collection<Product> getProductCollection() {
         return productCollection;
@@ -130,6 +134,8 @@ public class Manufacturer implements Serializable {
         this.productCollection = productCollection;
     }
 
+    // Comparer des instances
+    // Deux meme objet auront le meme hashcode
     @Override
     public int hashCode() {
         int hash = 0;
