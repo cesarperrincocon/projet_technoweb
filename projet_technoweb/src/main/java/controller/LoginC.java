@@ -6,7 +6,9 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +35,7 @@ public class LoginC extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         String action = request.getParameter("action");
         if (null != action) {
             switch (action) {
@@ -49,6 +51,31 @@ public class LoginC extends HttpServlet {
             }
 
         }
+        // On vérifie que l'utilisateur est connecté 
+        // On cherche l'attribut userName dans la session
+        String userName = findUserInSession(request);
+        String jspView = null;
+        if (null == userName) {
+            
+        // L'utilisateur n'est PAS CONNECTE :
+        // On redirige vers la page de login
+            jspView = "login.jsp";
+
+            
+         // L'utilisateur est CONNECTE :
+         // Si ce n'est pas un admin
+        } else if (!"admin".equals(userName)) { 
+         // On redirigera vers la page customer
+            jspView = "WEB-INF/customer.jsp";
+            
+         // Si c'est un admin
+         //On redirigera vers la page admin
+        } else if ("admin".equals(userName)) {
+            jspView = "WEB-INF/admin.jsp";
+        }
+        // On va vers la redirection choisie
+        request.getRequestDispatcher(jspView).forward(request, response);
+
     }
 
     private void doLogout(HttpServletRequest request) {
@@ -59,7 +86,7 @@ public class LoginC extends HttpServlet {
         }
     }
 
-    private void checkLogin(HttpServletRequest request) {
+    private void checkLogin(HttpServletRequest request) throws SQLException {
 
         // CREATION D'UN DAO POUR INTERACTION AVEC BDD
         DAO dao = new DAO();
@@ -76,12 +103,12 @@ public class LoginC extends HttpServlet {
         if ((loginP.equals("admin@admin") && (mdpP.equals("admin")))) {
             //lancement de la session :
             HttpSession session = request.getSession(true);
-            //Nom d'utlisateur devient automatiquement "admin"
+            //Nom d'utlisateur : "admin"
             session.setAttribute("userName", "admin");
         } //Si les champs ne sont pas vides :
         else if (!"".equals(loginP) && !"".equals(mdpP)) {
             // A IMPLEMENTER :
-            Customer c = dao.METHODE_TROUVER_CUSTOMER(loginP);
+            Customer c = dao.findCustomerID(loginP);
 
             //ON RECUPERE LES PARAM DU CUSTOMER : 
             String name = c.getName;
@@ -101,18 +128,17 @@ public class LoginC extends HttpServlet {
                 session.setAttribute("userPhone", phoneNumber);
                 session.setAttribute("userAddress", adresse);
 
-            } //Si le mdp et le login sont vides
-            else if ("".equals(loginP) || "".equals(mdpP)) { // 
-                request.setAttribute("errorMessage", "Login/Password incorrect");
+            } else if ("".equals(loginP) || "".equals(mdpP)) { // 
+                request.setAttribute("errorMessage", "Login ou Password incorrect");
             } else {
-                request.setAttribute("errorMessage", "Login/Password incorrect");
+                request.setAttribute("errorMessage", "Login ou Password incorrect");
             }
 
         }
 
     }
 
-    private String findCustomer(HttpServletRequest request) {
+    private String findUserInSession(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         return (session == null) ? null : (String) session.getAttribute("userName");
 
@@ -130,7 +156,11 @@ public class LoginC extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginC.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -144,7 +174,11 @@ public class LoginC extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginC.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
