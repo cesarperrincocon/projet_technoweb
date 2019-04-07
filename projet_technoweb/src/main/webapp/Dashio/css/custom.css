@@ -12,3 +12,15 @@ and open the template in the editor.
 .signInButton {
     margin-top: 10px !important;
 }
+
+.titreStats {
+	margin-left: 15px !important;
+}
+
+.form-panel {
+	margin: 15px !important;
+}
+
+.form-group {
+	margin: 0px !important;
+}
