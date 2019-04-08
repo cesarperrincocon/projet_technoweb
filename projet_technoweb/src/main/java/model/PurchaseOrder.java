@@ -5,158 +5,92 @@
  */
 package model;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author cperrinc
+ * @author adagneau
  */
-@Entity
-@Table(name = "PURCHASE_ORDER")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "PurchaseOrder.findAll", query = "SELECT p FROM PurchaseOrder p")
-    , @NamedQuery(name = "PurchaseOrder.findByOrderNum", query = "SELECT p FROM PurchaseOrder p WHERE p.orderNum = :orderNum")
-    , @NamedQuery(name = "PurchaseOrder.findByQuantity", query = "SELECT p FROM PurchaseOrder p WHERE p.quantity = :quantity")
-    , @NamedQuery(name = "PurchaseOrder.findByShippingCost", query = "SELECT p FROM PurchaseOrder p WHERE p.shippingCost = :shippingCost")
-    , @NamedQuery(name = "PurchaseOrder.findBySalesDate", query = "SELECT p FROM PurchaseOrder p WHERE p.salesDate = :salesDate")
-    , @NamedQuery(name = "PurchaseOrder.findByShippingDate", query = "SELECT p FROM PurchaseOrder p WHERE p.shippingDate = :shippingDate")
-    , @NamedQuery(name = "PurchaseOrder.findByFreightCompany", query = "SELECT p FROM PurchaseOrder p WHERE p.freightCompany = :freightCompany")})
-public class PurchaseOrder implements Serializable {
+public class PurchaseOrder {
+    private int ORDER_NUM;
+    private int CUSTOMER_ID;
+    private int PRODUCT_ID;
+    private int QUANTITY;
+    private double COST;
+    private String FREIGHT_COMPANY;
+    private String DESCRIPTION;
+    private Date SHIPPING_DATE;
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "ORDER_NUM")
-    private Integer orderNum;
-    @Column(name = "QUANTITY")
-    private Short quantity;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "SHIPPING_COST")
-    private BigDecimal shippingCost;
-    @Column(name = "SALES_DATE")
-    @Temporal(TemporalType.DATE)
-    private Date salesDate;
-    @Column(name = "SHIPPING_DATE")
-    @Temporal(TemporalType.DATE)
-    private Date shippingDate;
-    @Column(name = "FREIGHT_COMPANY")
-    private String freightCompany;
-    @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "CUSTOMER_ID")
-    @ManyToOne(optional = false)
-    private Customer customerId;
-    @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")
-    @ManyToOne(optional = false)
-    private Product productId;
-
-    public PurchaseOrder() {
+    public Date getSHIPPING_DATE() {
+        return SHIPPING_DATE;
     }
 
-    public PurchaseOrder(Integer orderNum) {
-        this.orderNum = orderNum;
+    public void setSHIPPING_DATE(Date SHIPPING_DATE) {
+        this.SHIPPING_DATE = SHIPPING_DATE;
+    }
+    
+    public String getDESCRIPTION() {
+        return DESCRIPTION;
     }
 
-    public Integer getOrderNum() {
-        return orderNum;
+    public void setDESCRIPTION(String DESCRIPTION) {
+        this.DESCRIPTION = DESCRIPTION;
+    }
+    
+    public PurchaseOrder(int ORDER_NUM, int CUSTOMER_ID, int QUANTITY){
+        this.CUSTOMER_ID = CUSTOMER_ID;
+        this.ORDER_NUM = ORDER_NUM;        
+        this.QUANTITY = QUANTITY;
     }
 
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
+    public int getPRODUCT_ID() {
+        return PRODUCT_ID;
     }
 
-    public Short getQuantity() {
-        return quantity;
+    public void setPRODUCT_ID(int PRODUCT_ID) {
+        this.PRODUCT_ID = PRODUCT_ID;
     }
 
-    public void setQuantity(Short quantity) {
-        this.quantity = quantity;
+    public double getCOST() {
+        return COST;
     }
 
-    public BigDecimal getShippingCost() {
-        return shippingCost;
+    public void setCOST(double COST) {
+        this.COST = COST;
     }
 
-    public void setShippingCost(BigDecimal shippingCost) {
-        this.shippingCost = shippingCost;
+    public String getFREIGHT_COMPANY() {
+        return FREIGHT_COMPANY;
     }
 
-    public Date getSalesDate() {
-        return salesDate;
+    public void setFREIGHT_COMPANY(String FREIGHT_COMPANY) {
+        this.FREIGHT_COMPANY = FREIGHT_COMPANY;
+    }
+    
+    
+    public int getORDER_NUM() {
+        return ORDER_NUM;
     }
 
-    public void setSalesDate(Date salesDate) {
-        this.salesDate = salesDate;
+    public void setORDER_NUM(int ORDER_NUM) {
+        this.ORDER_NUM = ORDER_NUM;
     }
 
-    public Date getShippingDate() {
-        return shippingDate;
+    public int getCUSTOMER_ID() {
+        return CUSTOMER_ID;
     }
 
-    public void setShippingDate(Date shippingDate) {
-        this.shippingDate = shippingDate;
+    public void setCUSTOMER_ID(int CUSTOMER_ID) {
+        this.CUSTOMER_ID = CUSTOMER_ID;
     }
 
-    public String getFreightCompany() {
-        return freightCompany;
+    public int getQUANTITY() {
+        return QUANTITY;
     }
 
-    public void setFreightCompany(String freightCompany) {
-        this.freightCompany = freightCompany;
-    }
-
-    public Customer getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Customer customerId) {
-        this.customerId = customerId;
-    }
-
-    public Product getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Product productId) {
-        this.productId = productId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (orderNum != null ? orderNum.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PurchaseOrder)) {
-            return false;
-        }
-        PurchaseOrder other = (PurchaseOrder) object;
-        if ((this.orderNum == null && other.orderNum != null) || (this.orderNum != null && !this.orderNum.equals(other.orderNum))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "model.PurchaseOrder[ orderNum=" + orderNum + " ]";
+    public void setQUANTITY(int QUANTITY) {
+        this.QUANTITY = QUANTITY;
     }
     
 }

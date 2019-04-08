@@ -94,9 +94,9 @@ public class LoginC extends HttpServlet {
 
         // ON RECUPERE LES PARAMETRES DE LOGIN.JSP DONT NOUS AVONS BESOIN
         // Le login :
-        String loginP = request.getParameter("NOM_DU_PARAM_DANS_JSP");
+        String loginP = request.getParameter("loginParam");
         // Le Mdp :
-        String mdpP = request.getParameter("NOM_DU_PARAM_DANS_JSP");
+        String mdpP = request.getParameter("passwordParam");
 
         //ADMIN OU CUSTOMER ?
         //Si c'est un admin il remplit les conditions suivantes :
@@ -111,11 +111,14 @@ public class LoginC extends HttpServlet {
             Customer c = dao.findCustomerID(loginP);
 
             //ON RECUPERE LES PARAM DU CUSTOMER : 
-            String name = c.getName;
-            String login = c.getEmail;
-            String mdp = c.getPassword;
-            String phoneNumber = c.getPhoneNumber;
-            String adresse = c.getAdress;
+            String name = c.getName();
+            String login = c.getEmail();
+            String mdp = c.getPassword();
+            String state = c.getState();
+            String city = c.getCity();
+            String phoneNumber = c.getPhone();
+            String adresse = c.getAddressline1();
+            
 
             //VERIFICATION DE LA CONCORDANDE ENTRE MDP ET LOGIN :
             //Si le mdp et le login correspondent bel et bien :
@@ -125,6 +128,8 @@ public class LoginC extends HttpServlet {
                 session.setAttribute("userName", name);
                 session.setAttribute("userEmail", login);
                 session.setAttribute("userPassword", mdp);
+                session.setAttribute("userState", state);
+                session.setAttribute("userCity", city);
                 session.setAttribute("userPhone", phoneNumber);
                 session.setAttribute("userAddress", adresse);
 
@@ -153,7 +158,6 @@ public class LoginC extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -171,7 +175,6 @@ public class LoginC extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -186,7 +189,6 @@ public class LoginC extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
