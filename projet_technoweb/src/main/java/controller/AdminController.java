@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,15 +17,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Customer;
 import model.DAO;
-
+import model.DiscountCode;
 
 /**
  *
- * @author ejaffre
+ * @author DGX
  */
-@WebServlet(name = "adminC", urlPatterns = {"/adminC"})
-public class AdminC extends HttpServlet {
+@WebServlet(name = "adminController", urlPatterns = {"/adminController"})
+public class AdminController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ParseException {
@@ -62,40 +63,40 @@ public class AdminC extends HttpServlet {
             switch (action) {
                 case "logout":
                     doLogout(request);
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Dashio/login.jsp").forward(request, response);
                     break;
                 case "caByProduct":
                     session.setAttribute("productCA", dao.chiffreAffaireByProduct(date_debut, date_fin));
                     session.setAttribute("dateProduct", "du " + date_debut + " au " + date_fin);
 
-                    request.getRequestDispatcher("/Dashio/lib/admin.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Dashio/admin.jsp").forward(request, response);
                     break;
 
                 case "caByProductCode":
                     session.setAttribute("productCodeCA", dao.chiffreAffaireByProductCode(date_debut_cat, date_fin_cat));
                     session.setAttribute("dateProductCode", "du " + date_debut_cat + " au " + date_fin_cat);
 
-                    request.getRequestDispatcher("/Dashio/lib/admin.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Dashio/admin.jsp").forward(request, response);
                     break;
 
                 case "caByGeo":
                     session.setAttribute("geoCA", dao.chiffreAffaireByState(date_debut_geo, date_fin_geo));
                     session.setAttribute("dateGeo", "du " + date_debut_geo + " au " + date_fin_geo);
 
-                    request.getRequestDispatcher("/Dashio/lib/admin.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Dashio/admin.jsp").forward(request, response);
                     break;
 
                 case "caByCli":
                     session.setAttribute("cliCA", dao.chiffreAffaireByCustomer(date_debut_cli, date_fin_cli));
                     session.setAttribute("dateCli", "du " + date_debut_cli + " au " + date_fin_cli);
-                    request.getRequestDispatcher("/Dashio/lib/admin.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Dashio/admin.jsp").forward(request, response);
                     break;
                     
                     
                 case "caByZip":
                     session.setAttribute("zipCA", dao.chiffreAffaireByZip(date_debut_zip, date_fin_zip));
                     session.setAttribute("dateZip", "du " + date_debut_zip + " au " + date_fin_zip);
-                    request.getRequestDispatcher("/Dashio/lib/admin.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Dashio/admin.jsp").forward(request, response);
                     break;
 
             }
@@ -109,9 +110,9 @@ public class AdminC extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(CustomerC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(AdminC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return;
     }
@@ -130,9 +131,9 @@ public class AdminC extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(CustomerC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(AdminC.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return;
     }

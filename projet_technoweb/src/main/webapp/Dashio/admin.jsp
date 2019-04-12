@@ -17,17 +17,17 @@
         <title>Statistiques administrateur</title>
 
         <!-- Favicons -->
-        <link href="img/stat.png" rel="icon">
+        <link href="Dashio/img/stat.png" rel="icon">
 
         <!-- Bootstrap core CSS -->
-        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="Dashio/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!--external css-->
-        <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="lib/bootstrap-datetimepicker/datertimepicker.css" />
+        <link href="Dashio/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="Dashio/lib/bootstrap-datetimepicker/datertimepicker.css" />
         <!-- Custom styles for this template -->
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/style-responsive.css" rel="stylesheet">
-        <link href="css/custom.css" rel="stylesheet">
+        <link href="Dashio/css/style.css" rel="stylesheet">
+        <link href="Dashio/css/style-responsive.css" rel="stylesheet">
+        <link href="Dashio/css/custom.css" rel="stylesheet">
 
         <!-- =======================================================
           Template Name: Dashio
