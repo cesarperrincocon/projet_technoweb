@@ -28,6 +28,7 @@
         <!-- Custom styles for this template -->
         <link href="Dashio/css/style.css" rel="stylesheet">
         <link href="Dashio/css/style-responsive.css" rel="stylesheet">
+        <link href="Dashio/css/custom.css" rel="stylesheet">
 
         <!-- =======================================================
           Template Name: Dashio
@@ -90,7 +91,7 @@
                                     <div class="centered">
                                         <div class="form-group">
 
-                                            <button type="submit" class="btn btn-theme">Effectuer le virement</button>
+                                            <button type="submit" class="btn btn-theme boutonArgent">Effectuer le virement</button>
                                         </div>
                                     </div>
                                 </form>
@@ -114,7 +115,7 @@
                                     <div class="form-inline">
                                         <label class="control-label col-md-3">Réaliser une nouvelle commande</label>
                                         <div class="col-md-3 col-xs-11">
-                                            <select name="produit" class="select-custom selectpicker">
+                                            <select name="produit" class="select-custom selectpicker selecteurProduits">
 
                                                 <c:forEach var="item" items="${listeProduits}">
                                                     <option value="${items}">${item}</option>
@@ -243,13 +244,13 @@
             <!--footer end-->
         </section>
         <!-- js placed at the end of the document so the pages load faster -->
-        <script src="lib/jquery/jquery.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-        <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
-        <script src="lib/jquery.scrollTo.min.js"></script>
-        <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
+        <script src="Dashio/lib/jquery/jquery.min.js"></script>
+        <script src="Dashio/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script class="include" type="text/javascript" src="Dashio/lib/jquery.dcjqaccordion.2.7.js"></script>
+        <script src="Dashio/lib/jquery.scrollTo.min.js"></script>
+        <script src="Dashio/lib/jquery.nicescroll.js" type="text/javascript"></script>
         <!--common script for all pages-->
-        <script src="lib/common-scripts.js"></script>
+        <script src="Dashio/lib/common-scripts.js"></script>
         <!--script for this page-->
 
     </body>

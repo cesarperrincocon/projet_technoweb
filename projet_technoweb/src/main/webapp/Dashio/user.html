@@ -18,6 +18,7 @@
         <!-- Custom styles for this template -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/style-responsive.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
 
         <!-- =======================================================
           Template Name: Dashio
@@ -42,15 +43,15 @@
                 <!--logo end-->
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
-                        <li>
-                            <a class="logout" href="login.html">Logout</a>
-                        </li>
+                        <form class="logout" action="LoginController" method="POST">
+                            <input class="form-control " type='submit' name='connexion' value='DECONNEXION'>
+                        </form>
                     </ul>
                 </div>
             </header>
             <!--header end-->
             <!-- **********************************************************************************************************************************************************
-                MAIN SIDEBAR MENU
+                MAIN SIDEBAR MENU .
                 *********************************************************************************************************************************************************** -->
             <!--sidebar start-->
             <aside>
@@ -58,7 +59,7 @@
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
                         <p class="centered">
-                            <a><img src="Dashio/img/hqdefault.jpg" class="img-circle" width="150"></a>
+                            <a><img src="img/hqdefault.jpg" class="img-circle" width="150" height="150"></a>
                         </p>
                         <h3 class="centered">${userName}</h3>
                         <li class="mt">
@@ -80,7 +81,7 @@
                                     <div class="centered">
                                         <div class="form-group">
 
-                                            <button type="submit" class="btn btn-theme">Effectuer le virement</button>
+                                            <button type="submit" class="btn btn-theme boutonArgent">Effectuer le virement</button>
                                         </div>
                                     </div>
                                 </form>
@@ -104,12 +105,12 @@
                                     <div class="form-inline">
                                         <label class="control-label col-md-3">Réaliser une nouvelle commande</label>
                                         <div class="col-md-3 col-xs-11">
-                                            <select name="produit" class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                            <select name="produit" class="select-custom selectpicker">
+
+                                                <c:forEach var="item" items="${listeProduits}">
+                                                    <option value="${items}">${item}</option>
+                                                </c:forEach>
+
                                             </select>
                                         </div>
                                         <input type="text" class="form-control" placeholder="Quantité">

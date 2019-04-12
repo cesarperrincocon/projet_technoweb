@@ -26,5 +26,17 @@ and open the template in the editor.
 }
 
 .container {
-	margin-top:200px !important;
+	margin-top: 200px !important;
+}
+
+.logout {
+	margin: 12px !important;
+}
+
+.boutonArgent{
+	margin: 12px !important;
+}
+
+.selecteurProduits{
+	margin: 7px !important;
 }

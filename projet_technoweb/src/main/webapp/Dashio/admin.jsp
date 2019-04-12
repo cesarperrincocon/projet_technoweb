@@ -24,6 +24,7 @@
         <!--external css-->
         <link href="Dashio/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="Dashio/lib/bootstrap-datetimepicker/datertimepicker.css" />
+        <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">	
         <!-- Custom styles for this template -->
         <link href="Dashio/css/style.css" rel="stylesheet">
         <link href="Dashio/css/style-responsive.css" rel="stylesheet">
@@ -52,7 +53,9 @@
                 <!--logo end-->
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
-                        <li><a class="logout" href="login.html">Logout</a></li>
+                        <form class="logout" action="LoginController" method="POST">
+                            <input class="form-control " type='submit' name='connexion' value='DECONNEXION'>
+                        </form>
                     </ul>
                 </div>
             </header>
@@ -66,7 +69,7 @@
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
                         <p class="centered">
-                            <a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a>
+                            <a href="profile.html"><img src="Dashio/img/hqdefault.jpg" class="img-circle" width="150" height="150"></a>
                         </p>
                         <h3 class="centered">Administrateur</h3>
                     </ul>
@@ -96,19 +99,7 @@
                                                 <input type="text" class="form-control dpd2" name="to">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-inline">
-                                        <label class="control-label col-md-3">Catégorie :</label>
-                                        <div class="col-md-3 col-xs-11">
-                                            <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                        <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>
+                                        <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>						
                                     </div>
                                 </form>
                             </div>
@@ -116,15 +107,15 @@
                                 <div class="content-panel">
                                     <h4><i class="fa fa-angle-right"></i> Doughnut</h4>
                                     <div class="panel-body text-center">
-                                        <canvas id="doughnut" height="300" width="400"></canvas>
+                                        <canvas id="doughnut1" height="300" width="400"></canvas>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Line</h4>
-                                    <div class="panel-body text-center">
-                                        <canvas id="line" height="300" width="400"></canvas>
+                                    <h4><i class="fa fa-angle-right"></i> Chart Example 2</h4>
+                                    <div class="panel-body">
+                                        <div id="hero-bar1" class="graph"></div>
                                     </div>
                                 </div>
                             </div>
@@ -142,35 +133,23 @@
                                                 <input type="text" class="form-control dpd2" name="to">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-inline">
-                                        <label class="control-label col-md-3">Zone géographique :</label>
-                                        <div class="col-md-3 col-xs-11">
-                                            <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                        <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>
+                                        <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>						
                                     </div>
                                 </form>
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Radar</h4>
+                                    <h4><i class="fa fa-angle-right"></i> Doughnut</h4>
                                     <div class="panel-body text-center">
-                                        <canvas id="radar" height="300" width="400"></canvas>
+                                        <canvas id="doughnut2" height="300" width="400"></canvas>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Polar Area</h4>
-                                    <div class="panel-body text-center">
-                                        <canvas id="polarArea" height="300" width="400"></canvas>
+                                    <h4><i class="fa fa-angle-right"></i> Chart Example 2</h4>
+                                    <div class="panel-body">
+                                        <div id="hero-bar2" class="graph"></div>
                                     </div>
                                 </div>
                             </div>
@@ -188,35 +167,23 @@
                                                 <input type="text" class="form-control dpd2" name="to">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-inline">
-                                        <label class="control-label col-md-3">Client :</label>
-                                        <div class="col-md-3 col-xs-11">
-                                            <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                        <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>
-                                    </div>					
+                                        <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>						
+                                    </div>			
                                 </form>
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Bar</h4>
+                                    <h4><i class="fa fa-angle-right"></i> Doughnut</h4>
                                     <div class="panel-body text-center">
-                                        <canvas id="bar" height="300" width="400"></canvas>
+                                        <canvas id="doughnut3" height="300" width="400"></canvas>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Pie</h4>
-                                    <div class="panel-body text-center">
-                                        <canvas id="pie" height="300" width="400"></canvas>
+                                    <h4><i class="fa fa-angle-right"></i> Chart Example 2</h4>
+                                    <div class="panel-body">
+                                        <div id="hero-bar3" class="graph"></div>
                                     </div>
                                 </div>
                             </div>
@@ -250,23 +217,26 @@
             <!--footer end-->
         </section>
         <!-- js placed at the end of the document so the pages load faster -->
-        <script src="lib/jquery/jquery.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-        <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
-        <script src="lib/jquery.scrollTo.min.js"></script>
-        <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
+        <script src="Dashio/lib/jquery/jquery.min.js"></script>
+        <script src="Dashio/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script class="include" type="text/javascript" src="Dashio/lib/jquery.dcjqaccordion.2.7.js"></script>
+        <script src="Dashio/lib/jquery.scrollTo.min.js"></script>
+        <script src="Dashio/lib/jquery.nicescroll.js" type="text/javascript"></script>
+        <script src="Dashio/lib/raphael/raphael.min.js"></script>
+        <script src="Dashio/lib/morris/morris.min.js"></script>	
         <!--common script for all pages-->
-        <script src="lib/common-scripts.js"></script>
+        <script src="Dashio/lib/common-scripts.js"></script>
         <!--script for this page-->
-        <script src="lib/chart-master/Chart.js"></script>
-        <script src="lib/chartjs-conf.js"></script>
-        <script type="text/javascript" src="lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="lib/bootstrap-daterangepicker/date.js"></script>
-        <script type="text/javascript" src="lib/bootstrap-daterangepicker/daterangepicker.js"></script>
-        <script type="text/javascript" src="lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-        <script type="text/javascript" src="lib/bootstrap-daterangepicker/moment.min.js"></script>
-        <script type="text/javascript" src="lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
-        <script src="lib/advanced-form-components.js"></script>
+        <script src="Dashio/lib/chart-master/Chart.js"></script>
+        <script src="Dashio/lib/chartjs-conf.js"></script>
+        <script type="text/javascript" src="Dashio/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="Dashio/lib/bootstrap-daterangepicker/date.js"></script>
+        <script type="text/javascript" src="Dashio/lib/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script type="text/javascript" src="Dashio/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+        <script type="text/javascript" src="Dashio/lib/bootstrap-daterangepicker/moment.min.js"></script>
+        <script type="text/javascript" src="Dashio/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+        <script src="Dashio/lib/advanced-form-components.js"></script>
+        <script src="Dashio/lib/morris-conf.js"></script>
     </body>
 
 </html>
