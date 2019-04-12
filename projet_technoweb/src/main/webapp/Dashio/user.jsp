@@ -110,8 +110,10 @@
                                 <form action="#" class="form-horizontal style-form">
                                     <div class="form-inline">
                                         <label class="control-label col-md-3">Réaliser une nouvelle commande</label>
-                                        <div class="col-md-3 col-xs-11">
-                                            <select name="produit" class="form-control">
+                                        <div class="form-group">
+                                            <label>Produit</label>
+                                            <br>
+                                            <select name="produit" class="select-custom selectpicker">
                                                 <c:forEach var="item" items="${listeProduits}">
                                                     <option value="${item}">${item}</option>
                                                 </c:forEach>
