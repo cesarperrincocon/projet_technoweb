@@ -6,59 +6,114 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.DAO;
+
 
 /**
  *
  * @author ejaffre
  */
-@WebServlet(name = "AdminController", urlPatterns = {"/AdminController"})
+@WebServlet(name = "adminC", urlPatterns = {"/adminC"})
 public class AdminC extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AdminController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AdminController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            throws ServletException, IOException, SQLException, ParseException {
+        // Quelle action a appelé cette servlet ?
+        String action = request.getParameter("action");
+        HttpSession session = request.getSession();
+        DAO dao = new DAO();
+
+        ArrayList<String> des = dao.allProduct();
+        request.setAttribute("listeProduits", des);
+
+        // pour le CA par produit
+        String date_debut = request.getParameter("date_debut");
+        String date_fin = request.getParameter("date_fin");
+
+        // pour le CA par categorie d'article
+        String date_debut_cat = request.getParameter("date_debut_cat");
+        String date_fin_cat = request.getParameter("date_fin_cat");
+
+        // Ca par Geo
+        String date_debut_geo = request.getParameter("date_debut_geo");
+        String date_fin_geo = request.getParameter("date_fin_geo");
+
+        // Ca par Client
+        String date_debut_cli = request.getParameter("date_debut_cli");
+        String date_fin_cli = request.getParameter("date_fin_cli");
+        
+        
+        // Ca par ZIP (zone géo)
+        String date_debut_zip = request.getParameter("date_debut_zip");
+        String date_fin_zip = request.getParameter("date_fin_zip");
+
+        if (null != action) {
+            switch (action) {
+                case "logout":
+                    doLogout(request);
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    break;
+                case "caByProduct":
+                    session.setAttribute("productCA", dao.chiffreAffaireByProduct(date_debut, date_fin));
+                    session.setAttribute("dateProduct", "du " + date_debut + " au " + date_fin);
+
+                    request.getRequestDispatcher("/Dashio/lib/admin.jsp").forward(request, response);
+                    break;
+
+                case "caByProductCode":
+                    session.setAttribute("productCodeCA", dao.chiffreAffaireByProductCode(date_debut_cat, date_fin_cat));
+                    session.setAttribute("dateProductCode", "du " + date_debut_cat + " au " + date_fin_cat);
+
+                    request.getRequestDispatcher("/Dashio/lib/admin.jsp").forward(request, response);
+                    break;
+
+                case "caByGeo":
+                    session.setAttribute("geoCA", dao.chiffreAffaireByState(date_debut_geo, date_fin_geo));
+                    session.setAttribute("dateGeo", "du " + date_debut_geo + " au " + date_fin_geo);
+
+                    request.getRequestDispatcher("/Dashio/lib/admin.jsp").forward(request, response);
+                    break;
+
+                case "caByCli":
+                    session.setAttribute("cliCA", dao.chiffreAffaireByCustomer(date_debut_cli, date_fin_cli));
+                    session.setAttribute("dateCli", "du " + date_debut_cli + " au " + date_fin_cli);
+                    request.getRequestDispatcher("/Dashio/lib/admin.jsp").forward(request, response);
+                    break;
+                    
+                    
+                case "caByZip":
+                    session.setAttribute("zipCA", dao.chiffreAffaireByZip(date_debut_zip, date_fin_zip));
+                    session.setAttribute("dateZip", "du " + date_debut_zip + " au " + date_fin_zip);
+                    request.getRequestDispatcher("/Dashio/lib/admin.jsp").forward(request, response);
+                    break;
+
+            }
         }
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerC.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return;
     }
 
     /**
@@ -72,17 +127,26 @@ public class AdminC extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerC.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return;
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    private void doLogout(HttpServletRequest request) {
+        // On termine la session
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+    }
 
+    private String findUserInSession(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        return (session == null) ? null : (String) session.getAttribute("userName");
+    }
 }

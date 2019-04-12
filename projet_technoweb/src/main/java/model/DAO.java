@@ -32,9 +32,12 @@ public class DAO {
     /**
      * Construit le DAO avec sa source de données
      */
-    public DAO(DataSource dataSource) {
-		this.myDataSource = dataSource;
-	}
+   
+	
+
+    public DAO() {
+        this.myDataSource = DataSourceFactory.getDataSource();
+}
 
     
     
