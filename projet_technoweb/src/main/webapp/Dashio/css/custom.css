@@ -24,3 +24,7 @@ and open the template in the editor.
 .form-group {
 	margin: 0px !important;
 }
+
+.container {
+	margin-top:200px !important;
+}
