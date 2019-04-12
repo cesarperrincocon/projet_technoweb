@@ -65,14 +65,32 @@
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
                         <p class="centered">
-                            <a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a>
+                            <a><img src="Dashio/img/hqdefault.jpg" class="img-circle" width="150"></a>
                         </p>
-                        <h3 class="centered">Sam Soffes</h3>
+                        <h3 class="centered">${userName}</h3>
                         <li class="mt">
                             <div class="centered">
                                 <h5><i class="fa fa-money"></i> SOLDE</h5>							
-                                <h4>$ 250000</h4>
+                                <h4>${solde}$</h4>
                             </div>						
+                        </li>
+                        <li class="mt">
+                            <div class="centered">
+                                <form method='POST' action="customerController">
+                                    <div class="centered">
+                                        <div class="form-group">
+                                            <label>Somme à verser</label>
+                                            <input type="text" class="form-control" placeholder="montant" name="montant">
+                                            <input type="hidden" name="action" value="DO_VIREMENT">
+                                        </div>
+                                    </div>
+                                    <div class="centered">
+                                        <div class="form-group">
+
+                                            <button type="submit" class="btn btn-theme">Effectuer le virement</button>
+                                        </div>
+                                    </div>
+                                </form>
                         </li>
                     </ul>
                     <!-- sidebar menu end-->
@@ -94,17 +112,16 @@
                                         <label class="control-label col-md-3">Réaliser une nouvelle commande</label>
                                         <div class="col-md-3 col-xs-11">
                                             <select name="produit" class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                                <c:forEach var="item" items="${listeProduits}">
+                                                    <option value="${item}">${item}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <input type="text" class="form-control" placeholder="Quantité">
                                         <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>
                                     </div>
                                 </form>
+
                             </div>
                             <!-- /form-panel -->
                         </div>
@@ -190,52 +207,52 @@
                                                                             </tr>
                                                                         </tbody>-->
                                     <tbody>
-                                                <c:forEach var="co" items="${commandes}">
-                                                    <tr>
-                                                <form method='POST' action="customerController">
-                                                    <td >
-                                                        ${co.CUSTOMER_ID}
-                                                    </td>
-                                                    <td>
-                                                        <input hidden name="purchaseToEdit" id="${co.ORDER_NUM}" type="text" class="validate" value="${co.ORDER_NUM}">
-                                                        <p name="purchaseToEdit" value="${co.ORDER_NUM}">${co.ORDER_NUM}</p>
-                                                    </td>
-                                                    <td >
-                                                        <input name="quantityToEdit" id="${co.QUANTITY}" type="text" class="validate" value ="${co.QUANTITY}">
-                                                        <input type="hidden" name="action" value="EDIT_COMMANDE">
-                                                    </td>
-                                                    
-                                                     <td>
-                                                        <button type="submit" class="btn btn-info btn-fill pull-left">Edit <i class="fa fa-pencil"></i></button>
+                                    <c:forEach var="co" items="${commandes}">
+                                        <tr>
+                                        <form method='POST' action="customerController">
+                                            <td >
+                                                ${co.CUSTOMER_ID}
+                                            </td>
+                                            <td>
+                                                <input hidden name="purchaseToEdit" id="${co.ORDER_NUM}" type="text" class="validate" value="${co.ORDER_NUM}">
+                                                <p name="purchaseToEdit" value="${co.ORDER_NUM}">${co.ORDER_NUM}</p>
+                                            </td>
+                                            <td >
+                                                <input name="quantityToEdit" id="${co.QUANTITY}" type="text" class="validate" value ="${co.QUANTITY}">
+                                                <input type="hidden" name="action" value="EDIT_COMMANDE">
+                                            </td>
 
-                                                    </td>
-                                                </form>
-                                                    <td >
-                                                        <fmt:setLocale value = "en_US"/>
-                                                        <fmt:formatNumber value = "${co.COST}" type = "currency"/>
-                                                        
-                                                    </td>
-                                                    <td >
-                                                        ${co.DESCRIPTION}
-                                                    </td>
-                                                    <td >
-                                                        ${co.SHIPPING_DATE}
-                                                    </td>
-                                                    <form method='POST' action="customerController">
-                                                    <td>
-                                                        <input hidden name="purchaseToDelete" id="${co.ORDER_NUM}" type="text" class="validate" value="${co.ORDER_NUM}">
-                                                        <input type="hidden" name="action" value="DELETE_COMMANDE">
-                                                        <button type="submit" class="btn btn-info btn-fill pull-left">Delete <i class="fa fa-trash"></i></button>
-                                                           
-                                                        </a>
-                                                    </td>
-                                                    </form>
-                                                   
-                                             
-                                                </tr>
-                                            </c:forEach> 
-                                            </tbody>
-                                    
+                                            <td>
+                                                <button type="submit" class="btn btn-info btn-fill pull-left">Edit <i class="fa fa-pencil"></i></button>
+
+                                            </td>
+                                        </form>
+                                        <td >
+                                        <fmt:setLocale value = "en_US"/>
+                                        <fmt:formatNumber value = "${co.COST}" type = "currency"/>
+
+                                        </td>
+                                        <td >
+                                            ${co.DESCRIPTION}
+                                        </td>
+                                        <td >
+                                            ${co.SHIPPING_DATE}
+                                        </td>
+                                        <form method='POST' action="customerController">
+                                            <td>
+                                                <input hidden name="purchaseToDelete" id="${co.ORDER_NUM}" type="text" class="validate" value="${co.ORDER_NUM}">
+                                                <input type="hidden" name="action" value="DELETE_COMMANDE">
+                                                <button type="submit" class="btn btn-info btn-fill pull-left">Delete <i class="fa fa-trash"></i></button>
+
+                                                </a>
+                                            </td>
+                                        </form>
+
+
+                                        </tr>
+                                    </c:forEach> 
+                                    </tbody>
+
                                 </table>
                             </div>
                             <!-- /content-panel -->
