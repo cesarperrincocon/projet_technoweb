@@ -17,14 +17,14 @@
         <title>Commandes</title>
 
         <!-- Favicons -->
-        <link href="img/order.png" rel="icon">
+        <link href="Dashio/img/order.png" rel="icon">
         <!-- Bootstrap core CSS -->
-        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="Dashio/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!--external css-->
-        <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="Dashio/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
         <!-- Custom styles for this template -->
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/style-responsive.css" rel="stylesheet">
+        <link href="Dashio/css/style.css" rel="stylesheet">
+        <link href="Dashio/css/style-responsive.css" rel="stylesheet">
 
         <!-- =======================================================
           Template Name: Dashio
@@ -65,14 +65,32 @@
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
                         <p class="centered">
-                            <a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a>
+                            <a><img src="Dashio/img/hqdefault.jpg" class="img-circle" width="150"></a>
                         </p>
-                        <h3 class="centered">Sam Soffes</h3>
+                        <h3 class="centered">${userName}</h3>
                         <li class="mt">
                             <div class="centered">
                                 <h5><i class="fa fa-money"></i> SOLDE</h5>							
-                                <h4>$ 250000</h4>
+                                <h4>${solde}$</h4>
                             </div>						
+                        </li>
+                        <li class="mt">
+                            <div class="centered">
+                                <form method='POST' action="customerController">
+                                    <div class="centered">
+                                        <div class="form-group">
+                                            <label>Somme à verser</label>
+                                            <input type="text" class="form-control" placeholder="montant" name="montant">
+                                            <input type="hidden" name="action" value="DO_VIREMENT">
+                                        </div>
+                                    </div>
+                                    <div class="centered">
+                                        <div class="form-group">
+
+                                            <button type="submit" class="btn btn-theme">Effectuer le virement</button>
+                                        </div>
+                                    </div>
+                                </form>
                         </li>
                     </ul>
                     <!-- sidebar menu end-->
@@ -94,17 +112,16 @@
                                         <label class="control-label col-md-3">Réaliser une nouvelle commande</label>
                                         <div class="col-md-3 col-xs-11">
                                             <select name="produit" class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                                <c:forEach var="item" items="${listeProduits}">
+                                                    <option value="${item}">${item}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <input type="text" class="form-control" placeholder="Quantité">
                                         <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>
                                     </div>
                                 </form>
+
                             </div>
                             <!-- /form-panel -->
                         </div>
@@ -122,72 +139,120 @@
                                             <th></th>
                                         </tr>
                                     </thead>
+                                    <!--         //CODE EXEMPLE                          
                                     <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <a href="basic_table.html#">Company Ltd</a>
+                                                                                </td>
+                                                                                <td class="hidden-phone">Lorem Ipsum dolor</td>
+                                                                                <td>12000.00$ </td>
+                                                                                <td>2</td>
+                                                                                <td>
+                                                                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <a href="basic_table.html#">
+                                                                                        Dashio co
+                                                                                    </a>
+                                                                                </td>
+                                                                                <td class="hidden-phone">Lorem Ipsum dolor</td>
+                                                                                <td>17900.00$ </td>
+                                                                                <td>3</td>
+                                                                                <td>
+                                                                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <a href="basic_table.html#">
+                                                                                        Another Co
+                                                                                    </a>
+                                                                                </td>
+                                                                                <td class="hidden-phone">Lorem Ipsum dolor</td>
+                                                                                <td>14400.00$ </td>
+                                                                                <td>25</td>
+                                                                                <td>
+                                                                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <a href="basic_table.html#">Dashio ext</a>
+                                                                                </td>
+                                                                                <td class="hidden-phone">Lorem Ipsum dolor</td>
+                                                                                <td>22000.50$ </td>
+                                                                                <td>52</td>
+                                                                                <td>
+                                                                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <a href="basic_table.html#">Total Ltd</a>
+                                                                                </td>
+                                                                                <td class="hidden-phone">Lorem Ipsum dolor</td>
+                                                                                <td>12120.00$ </td>
+                                                                                <td>2</td>
+                                                                                <td>
+                                                                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>-->
+                                    <tbody>
+                                    <c:forEach var="co" items="${commandes}">
                                         <tr>
-                                            <td>
-                                                <a href="basic_table.html#">Company Ltd</a>
+                                        <form method='POST' action="customerController">
+                                            <td >
+                                                ${co.CUSTOMER_ID}
                                             </td>
-                                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                            <td>12000.00$ </td>
-                                            <td>2</td>
                                             <td>
-                                                <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                                <input hidden name="purchaseToEdit" id="${co.ORDER_NUM}" type="text" class="validate" value="${co.ORDER_NUM}">
+                                                <p name="purchaseToEdit" value="${co.ORDER_NUM}">${co.ORDER_NUM}</p>
                                             </td>
-                                        </tr>
-                                        <tr>
+                                            <td >
+                                                <input name="quantityToEdit" id="${co.QUANTITY}" type="text" class="validate" value ="${co.QUANTITY}">
+                                                <input type="hidden" name="action" value="EDIT_COMMANDE">
+                                            </td>
+
                                             <td>
-                                                <a href="basic_table.html#">
-                                                    Dashio co
+                                                <button type="submit" class="btn btn-info btn-fill pull-left">Edit <i class="fa fa-pencil"></i></button>
+
+                                            </td>
+                                        </form>
+                                        <td >
+                                        <fmt:setLocale value = "en_US"/>
+                                        <fmt:formatNumber value = "${co.COST}" type = "currency"/>
+
+                                        </td>
+                                        <td >
+                                            ${co.DESCRIPTION}
+                                        </td>
+                                        <td >
+                                            ${co.SHIPPING_DATE}
+                                        </td>
+                                        <form method='POST' action="customerController">
+                                            <td>
+                                                <input hidden name="purchaseToDelete" id="${co.ORDER_NUM}" type="text" class="validate" value="${co.ORDER_NUM}">
+                                                <input type="hidden" name="action" value="DELETE_COMMANDE">
+                                                <button type="submit" class="btn btn-info btn-fill pull-left">Delete <i class="fa fa-trash"></i></button>
+
                                                 </a>
                                             </td>
-                                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                            <td>17900.00$ </td>
-                                            <td>3</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                            </td>
+                                        </form>
+
+
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="basic_table.html#">
-                                                    Another Co
-                                                </a>
-                                            </td>
-                                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                            <td>14400.00$ </td>
-                                            <td>25</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="basic_table.html#">Dashio ext</a>
-                                            </td>
-                                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                            <td>22000.50$ </td>
-                                            <td>52</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="basic_table.html#">Total Ltd</a>
-                                            </td>
-                                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                            <td>12120.00$ </td>
-                                            <td>2</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                            </td>
-                                        </tr>
+                                    </c:forEach> 
                                     </tbody>
+
                                 </table>
                             </div>
                             <!-- /content-panel -->
