@@ -7,8 +7,10 @@ package model;
 
 /**
  *
- * @author DGX
+ * @author psandre
  */
+
+// Enregistrement de la table Customer
 public class Customer {
     public String email;
     public String password;
@@ -19,6 +21,8 @@ public class Customer {
     public String addressline1;
     public int credit;
 
+    
+// Accesseurs et Modificateurs
     public String getState() {
         return state;
     }
@@ -67,10 +71,7 @@ public class Customer {
     public void setName(String name) {
         this.name = name;
     }
-    public Customer(){
-        
-    }
-
+ 
     public String getEmail() {
         return email;
     }
