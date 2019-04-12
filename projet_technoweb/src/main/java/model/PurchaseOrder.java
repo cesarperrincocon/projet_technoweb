@@ -5,12 +5,11 @@
  */
 package model;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.util.Date;
 
 /**
  *
- * @author adagneau
+ * @author psandre
  */
 public class PurchaseOrder {
     private int ORDER_NUM;
@@ -21,6 +20,8 @@ public class PurchaseOrder {
     private String FREIGHT_COMPANY;
     private String DESCRIPTION;
     private Date SHIPPING_DATE;
+    
+    //Accesseurs et Modificateurs
 
     public Date getSHIPPING_DATE() {
         return SHIPPING_DATE;

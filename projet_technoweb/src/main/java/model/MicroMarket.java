@@ -6,52 +6,21 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author cperrinc
+ * @author psandre
  */
-@Entity
-@Table(name = "MICRO_MARKET")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "MicroMarket.findAll", query = "SELECT m FROM MicroMarket m")
-    , @NamedQuery(name = "MicroMarket.findByZipCode", query = "SELECT m FROM MicroMarket m WHERE m.zipCode = :zipCode")
-    , @NamedQuery(name = "MicroMarket.findByRadius", query = "SELECT m FROM MicroMarket m WHERE m.radius = :radius")
-    , @NamedQuery(name = "MicroMarket.findByAreaLength", query = "SELECT m FROM MicroMarket m WHERE m.areaLength = :areaLength")
-    , @NamedQuery(name = "MicroMarket.findByAreaWidth", query = "SELECT m FROM MicroMarket m WHERE m.areaWidth = :areaWidth")})
 public class MicroMarket implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "ZIP_CODE")
     private String zipCode;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "RADIUS")
     private Double radius;
-    @Column(name = "AREA_LENGTH")
     private Double areaLength;
-    @Column(name = "AREA_WIDTH")
     private Double areaWidth;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "zip")
-    private Collection<Customer> customerCollection;
 
-    public MicroMarket() {
-    }
-
+// Accesseurs et Modificateurs
+    
     public MicroMarket(String zipCode) {
         this.zipCode = zipCode;
     }
@@ -88,15 +57,9 @@ public class MicroMarket implements Serializable {
         this.areaWidth = areaWidth;
     }
 
-    @XmlTransient
-    public Collection<Customer> getCustomerCollection() {
-        return customerCollection;
-    }
-
-    public void setCustomerCollection(Collection<Customer> customerCollection) {
-        this.customerCollection = customerCollection;
-    }
-
+    
+    // Hashcode et Equals =>  deux objets égaux doivent présenter le même hashcode
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -17,13 +17,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Customer;
 import model.DAO;
 
 /**
  *
  * @author ejaffre
  */
-@WebServlet(name = "CustomerController", urlPatterns = {"/CustomerController"})
+@WebServlet(name = "CustomerC", urlPatterns = {"/CustomerC"})
 public class CustomerC extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -39,14 +40,43 @@ public class CustomerC extends HttpServlet {
         String quantite = request.getParameter("quantite");
         ArrayList<String> lproduits = dao.allProduct();
         request.setAttribute("listeProduits", lproduits);
-        
+
         // POUR SUPPRIMER DES COMMANDES :
         //Commande à supprimer :
         String purchaseToDelete = request.getParameter("purchaseToDelete"); //param dans JSP
-        String password = ((String)session.getAttribute("userPassword"));
-        
+        String password = ((String) session.getAttribute("userPassword"));
+
         // POUR EDITER DES COMMANDES :
         String purchaseToEdit = request.getParameter("purchaseToEdit"); //param dans JSP
+
+        // INFORMATION CLIENT
+        Double solde = dao.soldeClient(Integer.parseInt(password));
+        session.setAttribute("solde", solde);
+
+        // request.setAttribute("code", viewCodes(request));
+        try {
+            Customer c = new Customer();
+            c.setPassword(password);
+
+            switch (action) {
+
+                //AJOUT D'UNE COMMANDE
+                case "ADD_COMMANDE":
+                    dao.addCommande(Integer.parseInt(password), Integer.parseInt(quantite), dao.numProduct(request.getParameter("produit")));
+                    session.setAttribute("commandes", dao.customerCommandes(c));
+                    solde = dao.soldeClient(Integer.parseInt(password));
+                    session.setAttribute("solde", solde);
+                    request.setAttribute("message", "Commande de " + quantite + " '" + request.getParameter("produit") + "'" + " effectuée !");
+                    request.getRequestDispatcher("Dashio/lib/basic_table.html").forward(request, response);
+                    break;
+                case "DELETE_COMMANDE" :
+                    try {
+                        dao.deleteCommande(Integer.parseInt(purchaseToDelete));
+                        
+                    }
+            }
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

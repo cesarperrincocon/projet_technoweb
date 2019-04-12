@@ -44,7 +44,7 @@ public class DAO {
      * @throws SQLException 
      */
 
-    // entrer l'id d'un client est la somme que vous voulez verser sur son compte
+    // Entrer l'ID du client et la somme que vous souhaitez verser sur son compte
     public int virement(int id, double montant) throws SQLException {
         int ret = 0;
         String sql = "UPDATE CUSTOMER SET CREDIT_LIMIT = ? WHERE CUSTOMER_ID = ?";
@@ -57,6 +57,7 @@ public class DAO {
             }
         return ret;
     }
+    
     /**
      * 
      * @param id du client
@@ -64,7 +65,8 @@ public class DAO {
      * @throws SQLException 
      */
 
-    //metode qui recupere la solde presente sur le compte d'un client en renseignant son id
+    
+    // Méthode qui récupère le solde présent sur le compte d'un client en renseignant son id
     public double soldeClient(int id) throws SQLException {
         double ret = 0;
         String sql = "SELECT CREDIT_LIMIT FROM CUSTOMER WHERE CUSTOMER_ID = ?";
@@ -86,7 +88,8 @@ public class DAO {
  * @return 1 si la modification a bien été faite
  * @throws SQLException 
  */
-    // méthode qui va mettre à jour la solde d'un client en prenant en compte son id et le prix de son achat
+    
+    // Méthode qui va mettre à jour le solde d'un client en prenant en compte son ID et le prix de son achat
     public int updateSolde(int id, double price) throws SQLException {
         int ret = 0;
         String sql = "UPDATE CUSTOMER SET CREDIT_LIMIT = ? WHERE CUSTOMER_ID = ?";
@@ -109,13 +112,13 @@ public class DAO {
      * @throws SQLException 
      */
 
-    // Methode qui vériffie si le cliant a assez d'argent sur son compte pour poouvoir effectuer son achat
+    // Méthode qui vérifie si le client a assez d'argent sur son compte pour pouvoir effectuer son achat
     public boolean checkAchatSolde(int id, int product_id, int quantite) throws SQLException {
         boolean ret = false;
         double solde = this.soldeClient(id);
         if (solde >= setPrix(quantite, product_id, id)) {
             ret = true;
-            System.out.println("Le prix est de tadadadadadadadada" + setPrix(quantite, product_id, id));
+            System.out.println("Le prix est de " + setPrix(quantite, product_id, id));
         }
         return ret;
     }
@@ -126,7 +129,7 @@ public class DAO {
      * @return une liste comprenant les discounts codes d'un customer
      * @throws SQLException 
      */
-    // retournne le discount code d'un client en fonction de son id
+    // Retourne le discount code d'un client en fonction de son ID
     public List<DiscountCode> customerCodes(Customer c) throws SQLException {
         List<DiscountCode> result = new LinkedList<>();
         int id = Integer.parseInt(c.getPassword());
@@ -158,7 +161,7 @@ public class DAO {
      * @throws SQLException 
      */
 
-    // methode qui retourne dans une liste la liste de tous les achats d'un client
+    // Méthode qui retourne dans une liste la liste de tous les achats d'un client
     public List<PurchaseOrder> customerCommandes(Customer c) throws SQLException {
         List<PurchaseOrder> result = new LinkedList<>();
         int id = Integer.parseInt(c.getPassword());
@@ -258,7 +261,7 @@ public class DAO {
      * @throws SQLException 
      */
 
-    //retourne la valeur du code de reduction d'un client en fonction de son id
+    //Retourne la valeur du code de reduction d'un client en fonction de son id
     public double valueOfDiscountCode(int customer_id) throws SQLException {
         double ret = 0;
         String sql = "SELECT RATE FROM DISCOUNT_CODE"
@@ -288,7 +291,7 @@ public class DAO {
      * @throws SQLException 
      */
 
-    // créer un dsicount code
+    // créer un discount code
     public int addDiscountCode(String code, float rate) throws SQLException {
         int result = 0;
         String sql = "INSERT INTO DISCOUNT_CODE VALUES (?, ?)";
@@ -383,7 +386,7 @@ public class DAO {
     
     /**
      * 
-     * @return tous les produits disponnbiles
+     * @return tous les produits disponibles
      * @throws SQLException 
      */
 

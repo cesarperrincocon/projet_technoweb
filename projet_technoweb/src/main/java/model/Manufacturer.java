@@ -7,70 +7,29 @@ package model;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author cperrinc
+ * @author psandre
  */
-@Entity
-@Table(name = "MANUFACTURER")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Manufacturer.findAll", query = "SELECT m FROM Manufacturer m")
-    , @NamedQuery(name = "Manufacturer.findByManufacturerId", query = "SELECT m FROM Manufacturer m WHERE m.manufacturerId = :manufacturerId")
-    , @NamedQuery(name = "Manufacturer.findByName", query = "SELECT m FROM Manufacturer m WHERE m.name = :name")
-    , @NamedQuery(name = "Manufacturer.findByAddressline1", query = "SELECT m FROM Manufacturer m WHERE m.addressline1 = :addressline1")
-    , @NamedQuery(name = "Manufacturer.findByAddressline2", query = "SELECT m FROM Manufacturer m WHERE m.addressline2 = :addressline2")
-    , @NamedQuery(name = "Manufacturer.findByCity", query = "SELECT m FROM Manufacturer m WHERE m.city = :city")
-    , @NamedQuery(name = "Manufacturer.findByState", query = "SELECT m FROM Manufacturer m WHERE m.state = :state")
-    , @NamedQuery(name = "Manufacturer.findByZip", query = "SELECT m FROM Manufacturer m WHERE m.zip = :zip")
-    , @NamedQuery(name = "Manufacturer.findByPhone", query = "SELECT m FROM Manufacturer m WHERE m.phone = :phone")
-    , @NamedQuery(name = "Manufacturer.findByFax", query = "SELECT m FROM Manufacturer m WHERE m.fax = :fax")
-    , @NamedQuery(name = "Manufacturer.findByEmail", query = "SELECT m FROM Manufacturer m WHERE m.email = :email")
-    , @NamedQuery(name = "Manufacturer.findByRep", query = "SELECT m FROM Manufacturer m WHERE m.rep = :rep")})
 public class Manufacturer implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "MANUFACTURER_ID")
     private Integer manufacturerId;
-    @Column(name = "NAME")
     private String name;
-    @Column(name = "ADDRESSLINE1")
     private String addressline1;
-    @Column(name = "ADDRESSLINE2")
     private String addressline2;
-    @Column(name = "CITY")
     private String city;
-    @Column(name = "STATE")
     private String state;
-    @Column(name = "ZIP")
     private String zip;
-    @Column(name = "PHONE")
     private String phone;
-    @Column(name = "FAX")
     private String fax;
-    @Column(name = "EMAIL")
     private String email;
-    @Column(name = "REP")
     private String rep;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturerId")
     private Collection<Product> productCollection;
 
-    public Manufacturer() {
-    }
+// Accesseurs et Modificateurs
 
     public Manufacturer(Integer manufacturerId) {
         this.manufacturerId = manufacturerId;
@@ -173,6 +132,7 @@ public class Manufacturer implements Serializable {
         this.productCollection = productCollection;
     }
 
+// Hashcode et Equals =>  deux objets égaux doivent présenter le même hashcode
     @Override
     public int hashCode() {
         int hash = 0;
