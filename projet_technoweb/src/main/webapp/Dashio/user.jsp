@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,9 +52,9 @@
                 <!--logo end-->
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
-                        <li>
-                            <a class="logout" href="login.html">Logout</a>
-                        </li>
+                        <form class="logout" action="LoginController" method="POST">
+                            <input class="form-control " type='submit' name='connexion' value='DECONNEXION'>
+                        </form>
                     </ul>
                 </div>
             </header>
@@ -112,8 +115,9 @@
                                         <label class="control-label col-md-3">Réaliser une nouvelle commande</label>
                                         <div class="col-md-3 col-xs-11">
                                             <select name="produit" class="form-control">
+
                                                 <c:forEach var="item" items="${listeProduits}">
-                                                    <option value="${item}">${item}</option>
+                                                    <option value="${items}">${item}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -207,8 +211,8 @@
                                                                             </tr>
                                                                         </tbody>-->
                                     <tbody>
-                                    <c:forEach var="co" items="${commandes}">
-                                        <tr>
+                                        <c:forEach var="co" items="${commandes}">
+                                            <tr>
                                         <form method='POST' action="customerController">
                                             <td >
                                                 ${co.CUSTOMER_ID}
@@ -228,8 +232,8 @@
                                             </td>
                                         </form>
                                         <td >
-                                        <fmt:setLocale value = "en_US"/>
-                                        <fmt:formatNumber value = "${co.COST}" type = "currency"/>
+                                            <fmt:setLocale value = "en_US"/>
+                                            <fmt:formatNumber value = "${co.COST}" type = "currency"/>
 
                                         </td>
                                         <td >
