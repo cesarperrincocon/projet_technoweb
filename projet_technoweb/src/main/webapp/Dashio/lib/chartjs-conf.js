@@ -1,8 +1,8 @@
 var Script = function () {
 
 
-    var doughnutData = [
-        {
+    var doughnutData = [  
+	   {
             value: 30,
             color:"#1abc9c"
         },
@@ -24,6 +24,12 @@ var Script = function () {
         }
 
     ];
+	
+	let i = 0;
+	while(i < 4){
+			doughnutData = [{value : 30, color :  "#9b59b1e"}];
+			i++;
+	}
     var lineChartData = {
         labels : ["","","","","","",""],
         datasets : [
@@ -121,7 +127,9 @@ var Script = function () {
         ]
 
     };
-    new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
+    new Chart(document.getElementById("doughnut1").getContext("2d")).Doughnut(doughnutData);
+	new Chart(document.getElementById("doughnut2").getContext("2d")).Doughnut(doughnutData);
+	new Chart(document.getElementById("doughnut3").getContext("2d")).Doughnut(doughnutData);
     new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
     new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData);
     new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea(chartData);
