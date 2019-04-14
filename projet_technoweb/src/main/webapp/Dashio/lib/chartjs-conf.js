@@ -27,7 +27,7 @@ var Script = function () {
 	
 	let i = 0;
 	while(i < 4){
-			doughnutData = [{value : 30, color :  "#9b59b1e"}];
+			doughnutData = [{value : 30, color :  "#34495e"}];
 			i++;
 	}
     var lineChartData = {

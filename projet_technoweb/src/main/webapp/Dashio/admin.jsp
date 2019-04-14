@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,18 +91,19 @@
                     <div class="tab-pane" id="chartjs">
                         <div class="row mt">
                             <div class="form-panel">
-                                <form action="#" class="form-horizontal style-form">
+                                <form method='POST' action="AdminController" class="form-horizontal style-form">
                                     <h4><i class="fa fa-angle-right"></i> Par catégorie d'article</h4>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Choix de la période</label>
                                         <div class="col-md-4">
-                                            <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
-                                                <input type="text" class="form-control dpd1" name="from">
-                                                <span class="input-group-addon">Au</span>
-                                                <input type="text" class="form-control dpd2" name="to">
-                                            </div>
+                                                <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
+                                                    <input type="text" class="form-control dpd1" name="from">
+                                                    <span class="input-group-addon">Au</span>
+                                                    <input type="text" class="form-control dpd2" name="to">
+                                                </div>
                                         </div>
-                                        <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>						
+                                        <input type="hidden" name="action" value="caByProductCode">
+                                        <input type="submit" class="btn btn-theme">
                                     </div>
                                 </form>
                             </div>
