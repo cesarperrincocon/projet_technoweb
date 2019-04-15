@@ -968,14 +968,13 @@ public class DAO {
 
         try (Connection connection = myDataSource.getConnection();
                 PreparedStatement stmt = connection.prepareStatement(sql)) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             Date parsed1 = null;
             Date parsed2 = null;
             try {
                 parsed1 = sdf.parse(deb);
             } catch (ParseException e1) {
                 // TODO Auto-generated catch block
-
             }
             try {
                 parsed2 = sdf.parse(fin);
