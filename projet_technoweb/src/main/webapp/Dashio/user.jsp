@@ -54,7 +54,7 @@
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
                         <form class="logout" action="LoginController" method="POST">
-                            <input class="form-control " type='submit' name='action' value='DECONNEXION'>
+                            <input class="form-control " type='submit' name='connexion' value='DECONNEXION'>
                         </form>
                     </ul>
                 </div>
