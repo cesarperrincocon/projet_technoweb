@@ -69,7 +69,7 @@
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
                         <p class="centered">
-                            <a><img src="Dashio/img/harold.jpg" class="img-circle" width="150"></a>
+                            <a><img src="Dashio/img/harold.jpg" class="img-circle" width="150" height="150"></a>
                         </p>
                         <h3 class="centered">${userName}</h3>
                         <li class="mt">
