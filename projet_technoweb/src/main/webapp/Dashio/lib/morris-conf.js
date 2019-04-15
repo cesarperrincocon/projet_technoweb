@@ -15,7 +15,7 @@ var Script = function () {
            {"period": "2006 Q4", "licensed": 3245, "sorned": null},
            {"period": "2005 Q4", "licensed": 3289, "sorned": null}
       ];
-   
+   /*
       Morris.Bar({
         element: 'hero-bar1',
 		var label = [];
@@ -27,14 +27,17 @@ var Script = function () {
         ca.push(${item.value});
 		</c:forEach>
         data: [{label,ca}],
-        xkey: ca,
-        ykeys: label,
-        labels: label,
+        xkey: 'ca',
+        ykeys: ['label'],
+        labels: ['label'],
         barRatio: 0.4,
         xLabelAngle: 35,
         hideHover: 'auto',
         barColors: ['#ac92ec']
       });
+      
+      */
+
 	  
 	  Morris.Bar({
         element: 'hero-bar2',

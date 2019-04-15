@@ -856,7 +856,7 @@ public class DAO {
 
         try (Connection connection = myDataSource.getConnection();
                 PreparedStatement stmt = connection.prepareStatement(sql)) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             Date parsed1 = null;
             Date parsed2 = null;
             try {
@@ -911,7 +911,7 @@ public class DAO {
 
         try (Connection connection = myDataSource.getConnection();
                 PreparedStatement stmt = connection.prepareStatement(sql)) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             Date parsed1 = null;
             Date parsed2 = null;
             try {

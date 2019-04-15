@@ -96,11 +96,11 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Choix de la période</label>
                                         <div class="col-md-4">
-                                                <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
-                                                    <input type="text" class="form-control dpd1" name="from">
-                                                    <span class="input-group-addon">Au</span>
-                                                    <input type="text" class="form-control dpd2" name="to">
-                                                </div>
+                                            <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
+                                                <input type="text" class="form-control dpd1" name="date_debut_cat">
+                                                <span class="input-group-addon">Au</span>
+                                                <input type="text" class="form-control dpd2" name="date_fin_cat">
+                                            </div>
                                         </div>
                                         <input type="hidden" name="action" value="caByProductCode">
                                         <input type="submit" class="btn btn-theme">
@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Doughnut</h4>
+                                    <h4><i class="fa fa-angle-right"></i> Chiffre d'affaire par Catégorie d'article</h4>
                                     <div class="panel-body text-center">
                                         <canvas id="doughnut1" height="300" width="400"></canvas>
                                     </div>
@@ -117,7 +117,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Chart Example 2</h4>
+                                    <h4><i class="fa fa-angle-right"></i> Chiffre d'affaire par Catégorie d'article</h4>
                                     <div class="panel-body">
                                         <div id="hero-bar1" class="graph"></div>
                                     </div>
@@ -126,24 +126,25 @@
                         </div>
                         <div class="row mt">
                             <div class="form-panel">
-                                <form action="#" class="form-horizontal style-form">
+                                <form method='POST' action="AdminController" class="form-horizontal style-form">
                                     <h4><i class="fa fa-angle-right"></i> Par zone géographique</h4>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Choix de la période</label>
                                         <div class="col-md-4">
                                             <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
-                                                <input type="text" class="form-control dpd1" name="from">
+                                                <input type="text" class="form-control dpd1" name="date_debut_geo">
                                                 <span class="input-group-addon">Au</span>
-                                                <input type="text" class="form-control dpd2" name="to">
+                                                <input type="text" class="form-control dpd2" name="date_fin_geo">
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>						
+                                        <input type="hidden" name="action" value="caByGeo">
+                                        <input type="submit" class="btn btn-theme">						
                                     </div>
                                 </form>
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Doughnut</h4>
+                                    <h4><i class="fa fa-angle-right"></i> Chiffre d'affaire par Zone Géographique</h4>
                                     <div class="panel-body text-center">
                                         <canvas id="doughnut2" height="300" width="400"></canvas>
                                     </div>
@@ -151,7 +152,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Chart Example 2</h4>
+                                    <h4><i class="fa fa-angle-right"></i> Chiffre d'affaire par Zone Géographique</h4>
                                     <div class="panel-body">
                                         <div id="hero-bar2" class="graph"></div>
                                     </div>
@@ -160,24 +161,25 @@
                         </div>
                         <div class="row mt">
                             <div class="form-panel">
-                                <form action="#" class="form-horizontal style-form">
+                                <form method='POST' action="AdminController" class="form-horizontal style-form">
                                     <h4><i class="fa fa-angle-right"></i> Par client</h4>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Choix de la période</label>
                                         <div class="col-md-4">
                                             <div class="input-group input-large" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
-                                                <input type="text" class="form-control dpd1" name="from">
+                                                <input type="text" class="form-control dpd1" name="date_debut_cli">
                                                 <span class="input-group-addon">Au</span>
-                                                <input type="text" class="form-control dpd2" name="to">
+                                                <input type="text" class="form-control dpd2" name="date_fin_cli">
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>						
-                                    </div>			
+                                        <input type="hidden" name="action" value="caByCli">
+                                        <input type="submit" class="btn btn-theme">						
+                                    </div>
                                 </form>
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Doughnut</h4>
+                                    <h4><i class="fa fa-angle-right"></i> Chiffre d'affaire par Client</h4>
                                     <div class="panel-body text-center">
                                         <canvas id="doughnut3" height="300" width="400"></canvas>
                                     </div>
@@ -185,7 +187,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-panel">
-                                    <h4><i class="fa fa-angle-right"></i> Chart Example 2</h4>
+                                    <h4><i class="fa fa-angle-right"></i> Chiffre d'affaire par Client</h4>
                                     <div class="panel-body">
                                         <div id="hero-bar3" class="graph"></div>
                                     </div>
@@ -242,5 +244,95 @@
         <script src="Dashio/lib/advanced-form-components.js"></script>
         <script src="Dashio/lib/morris-conf.js"></script>
     </body>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+
+        google.charts.setOnLoadCallback(graphique_bar);
+
+        function graphique_bar() {
+            var donnees = [];
+            donnees.push(['Type de produit', "Chiffre d'affaire"]);
+        <c:forEach items="${productCodeCA}" var="item" >
+            donnees.push(['${item.key}',${item.value}]);
+        </c:forEach>
+            console.log(donnees);
+            var data = google.visualization.arrayToDataTable(donnees);
+            var options = {
+                title: 'CA par type de produit',
+                chartArea: {width: '50%'},
+                isStacked: true,
+                hAxis: {
+                    title: "CHIFFRE D'AFFAIRE en $",
+                    minValue: 0
+                },
+                vAxis: {
+                    title: 'CATEGORIE'
+                }
+            };
+            var chart = new google.visualization.BarChart(document.getElementById("hero-bar1"));
+            chart.draw(data, options);
+        }
+    </script>
+
+    <script>
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+
+        google.charts.setOnLoadCallback(graphique_bar);
+
+        function graphique_bar() {
+            var donnees = [];
+            donnees.push(['Type de produit', "Chiffre d'affaire"]);
+        <c:forEach items="${geoCA}" var="item" >
+            donnees.push(['${item.key}',${item.value}]);
+        </c:forEach>
+            console.log(donnees);
+            var data = google.visualization.arrayToDataTable(donnees);
+            var options = {
+                title: 'CA par zone géographique',
+                chartArea: {width: '50%'},
+                isStacked: true,
+                hAxis: {
+                    title: "CHIFFRE D'AFFAIRE en $",
+                    minValue: 0
+                },
+                vAxis: {
+                    title: 'ZONE GEO'
+                }
+            };
+            var chart = new google.visualization.BarChart(document.getElementById("hero-bar2"));
+            chart.draw(data, options);
+        }
+    </script>
+
+    <script>
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+
+        google.charts.setOnLoadCallback(graphique_bar);
+
+        function graphique_bar() {
+            var donnees = [];
+            donnees.push(['Type de produit', "Chiffre d'affaire"]);
+        <c:forEach items="${cliCA}" var="item" >
+                donnees.push(['${item.key}',${item.value}]);
+        </c:forEach>
+            console.log(donnees);
+            var data = google.visualization.arrayToDataTable(donnees);
+            var options = {
+                title: 'CA par Client',
+                chartArea: {width: '50%'},
+                isStacked: true,
+                hAxis: {
+                    title: "CHIFFRE D'AFFAIRE en $",
+                    minValue: 0
+                },
+                vAxis: {
+                    title: 'CLIENT'
+                }
+            };
+            var chart = new google.visualization.BarChart(document.getElementById("hero-bar3"));
+            chart.draw(data, options);
+        }
+    </script>
 
 </html>
