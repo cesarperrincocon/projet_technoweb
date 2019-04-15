@@ -54,7 +54,7 @@
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
                         <form class="logout" action="LoginController" method="POST">
-                            <input class="form-control " type='submit' name='connexion' value='DECONNEXION'>
+                            <input class="form-control " type='submit' name='action' value='DECONNEXION'>
                         </form>
                     </ul>
                 </div>
@@ -108,28 +108,47 @@
             <section id="main-content">
                 <section class="wrapper">
                     <h3><i class="fa fa-angle-right"></i> Commandes</h3>
+
+
                     <div class="row mt">
-                        <div class="col-lg-12">
-                            <div class="form-panel">
-                                <form action="#" class="form-horizontal style-form">
+
+                        <form method="POST" action="customerController" class="form-horizontal style-form">
+                            <div class="col-lg-12">
+
+
+                                <div class="form-panel">
+
+
                                     <div class="form-inline">
+
+
                                         <label class="control-label col-md-3">Réaliser une nouvelle commande</label>
+
+
                                         <div class="col-md-3 col-xs-11">
+
                                             <select name="produit" class="select-custom selectpicker selecteurProduits">
 
                                                 <c:forEach var="item" items="${listeProduits}">
-                                                    <option value="${items}">${item}</option>
+                                                    <option name="produit" value="${item}">${item}</option>
                                                 </c:forEach>
 
                                             </select>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Quantité">
-                                        <button type="button" class="btn btn-theme"><i class="fa fa-check"></i> Valider</button>
+
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Quantite" name="quantite">
+                                            <input type="hidden" name="action" value="ADD_COMMANDE">
+                                            <button type="submit" class="btn btn-theme"> Valider</button>
+                                        </div>
                                     </div>
-                                </form>
+                                </div>
+                                <!-- /form-panel -->
                             </div>
-                            <!-- /form-panel -->
-                        </div>
+                        </form>
+                        
+                        
                         <div class="col-lg-12">
                             <div class="form-panel">
                                 <table class="table table-striped table-advance table-hover">
@@ -137,78 +156,59 @@
                                     <hr>
                                     <thead>
                                         <tr>
+                                            <th>ID Client</th>
                                             <th><i class="fa fa-bookmark"> Numéro de commande</th>
-                                            <th>Produit</th>
-                                            <th>Prix</th>
-                                            <th>Quantité</th>
-                                            <th></th>
+                                            <th>Quantité</th>  
+                                            
+                                            <th>Prix Total</th>
+                                            <th>Type de produit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <a href="basic_table.html#">Company Ltd</a>
+                                        <c:forEach var="comm" items="${commandes}">
+                                            <tr>
+                                        <form method='POST' action="customerController">
+                                            <td >
+                                                ${comm.CUSTOMER_ID}
                                             </td>
-                                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                            <td>12000.00$ </td>
-                                            <td>2</td>
                                             <td>
-                                                <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                                <input hidden name="purchaseToEdit" id="${comm.ORDER_NUM}" type="text" class="validate" value="${comm.ORDER_NUM}">
+                                                <p name="purchaseToEdit" value="${comm.ORDER_NUM}">${comm.ORDER_NUM}</p>
                                             </td>
-                                        </tr>
-                                        <tr>
+                                            <td >
+                                                <input name="quantityToEdit" id="${comm.QUANTITY}" type="text" class="validate" value ="${comm.QUANTITY}">
+                                                <input type="hidden" name="action" value="EDIT_COMMANDE">
+                                            
+                                                <button type="submit" class="btn btn-primary btn-xs">Edit <i class="fa fa-pencil"></i></button>
+
+                                            </td>
+
+                                        </form>
+
+                                        <td>
+                                            <fmt:setLocale value = "en_US"/>
+                                            <fmt:formatNumber value = "${comm.COST}" type = "currency"/>
+                                        </td>
+                                        <td >
+                                            ${comm.SHIPPING_DATE}
+                                        </td>
+
+                                        <form method='POST' action="customerController">
                                             <td>
-                                                <a href="basic_table.html#">
-                                                    Dashio co
+                                                <input hidden name="purchaseToDelete" id="${comm.ORDER_NUM}" type="text" class="validate" value="${comm.ORDER_NUM}">
+                                                <input type="hidden" name="action" value="DELETE_COMMANDE">
+                                                <button type="submit" class="btn btn-danger btn-xs">Delete <i class="fa fa-trash-o"></i></button>
+
                                                 </a>
                                             </td>
-                                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                            <td>17900.00$ </td>
-                                            <td>3</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                            </td>
+                                        </form>
+
+                                       
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="basic_table.html#">
-                                                    Another Co
-                                                </a>
-                                            </td>
-                                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                            <td>14400.00$ </td>
-                                            <td>25</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="basic_table.html#">Dashio ext</a>
-                                            </td>
-                                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                            <td>22000.50$ </td>
-                                            <td>52</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="basic_table.html#">Total Ltd</a>
-                                            </td>
-                                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                            <td>12120.00$ </td>
-                                            <td>2</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                            </td>
-                                        </tr>
+
+
+
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
