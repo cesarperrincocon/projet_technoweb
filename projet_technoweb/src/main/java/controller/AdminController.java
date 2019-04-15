@@ -23,7 +23,7 @@ import model.DiscountCode;
 
 /**
  *
- * @author DGX
+ * @author ejaffre
  */
 @WebServlet(name = "adminController", urlPatterns = {"/adminController"})
 public class AdminController extends HttpServlet {

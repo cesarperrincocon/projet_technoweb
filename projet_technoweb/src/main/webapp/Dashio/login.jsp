@@ -14,7 +14,7 @@
         <meta name="description" content="">
         <meta name="author" content="Dashboard">
         <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-        <title>Autentification</title>
+        <title>Authentification</title>
 
         <!-- Favicons -->
         <link href="Dashio/img/login.png" rel="icon">

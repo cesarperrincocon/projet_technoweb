@@ -25,45 +25,50 @@ import model.PurchaseOrder;
 
 /**
  *
- * @author DGX
+ * @author ejaffre
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        // Quelle action a appelé cette servlet ?
+        // ON RECUPERE LA VALEUR DU PARAMETRE ACTION DANS LE JSP
         String action = request.getParameter("connexion");
         if (null != action) {
             switch (action) {
                 case "connexion":
+                    //SI C'EST UNE CONNEXION ON CHECK LE LOGIN
                     checkLogin(request);
-
                     break;
+                    
                 case "DECONNEXION":
-
+                    //SI C'EST UNE DECONNEXION ON LANCE LE PROCESSUS DE DECONNEXION   
                     doLogout(request);
                     break;
 
             }
         }
 
-        // Est-ce que l'utilisateur est connecté ?
-        // On cherche l'attribut userName dans la session
+        // UTILISATEUR CONNECTÉ ?
+        // ON CHERCHE L'ATTRIBUT 'userName'
         String userName = findUserInSession(request);
         String jspView = null;
         if (null == userName) {
-// L'utilisateur n'est pas connecté
-            // On choisit la page de login
+        // UTILISATEUR PAS CONNECTÉ :
+            
+            // ON ORIENTE VERS LA VUE LOGIN.JSP
             jspView = "Dashio/login.jsp";
-
-        } else if (!"admin".equals(userName)) { // L'utilisateur est connecté
-            // On choisit la page d'affichage
+            
+        // UTILISATEUR CONNECTÉ
+        } else if (!"admin".equals(userName)) { 
+            // SI CE N'EST PAS UN ADMIN ON ORIENTE VERS LA VUE USER.JSP
             jspView = "Dashio/user.jsp";
         } else if ("admin".equals(userName)) {
+            // SI C'EST UN ADMIN ON ORIENTE VERS LA VUE ADMIN.JSP
             jspView = "Dashio/admin.jsp";
         }
-        // On va vers la page choisie
+        
+        // ON CHARGE LA PAGE CHOISIE
         request.getRequestDispatcher(jspView).forward(request, response);
 
     }
@@ -97,33 +102,34 @@ public class LoginController extends HttpServlet {
     }
 
     private void checkLogin(HttpServletRequest request) throws SQLException {
-        // on va créer un DAO pour pouvoir intéragir avec la bdd
+        // ON CRÉE UN DAO POUR INTERAGIR AVEC LA BDD
         DAO dao = new DAO();
-        CustomerController cc = new CustomerController();
-        // Les paramètres transmis dans la requête
-
+       
+        // ON RECUPERE LES LOGIN ET PASSWORD ENTRÉS
         String loginParam = request.getParameter("loginParam");
         String passwordParam = request.getParameter("passwordParam");
-        // on va d'abord vérifier si c'est un admin qui tente de se connecter
+        
+        // ADMIN QUI SE CONNECTE ?
         if ((loginParam.equals("admin@admin") && (passwordParam.equals("admin")))) {
-            // On a trouvé la combinaison login / password
-            // On stocke l'information dans la session
-            HttpSession session = request.getSession(true); // démarre la session
+            // RECHERCHE DE LA COMBINAISON LOGIN/MDP
+            // ON STOCK L'INFORMATION DANS LA SESSION
+            HttpSession session = request.getSession(true); //DEMARRAGE DE LA SESSION
             session.setAttribute("userName", "admin");
+            
         } else if (!"".equals(loginParam) && !"".equals(passwordParam)) {
             Customer c = dao.findCustomerID(loginParam);
-            // Le login/password défini dans les propiétés du customer
             String login = c.getEmail();
             String password = c.getPassword();
             String userName = c.getName();
             String phone = c.getPhone();
             String address = c.getAddressline1();
 
-            // si le mail et le mdp correspondent alors on peut se connecter
+            // SI LE LOGIN ET LE MDP CORRESPONDENT
             if ((login.equals(loginParam) && (password.equals(passwordParam)))) {
-                // On a trouvé la combinaison login / password
-                // On stocke l'information dans la session
-                HttpSession session = request.getSession(true); // démarre la session
+                
+                // ON STOCK LES INFOS DANS LA SESSION
+                //DEMARRAGE DE LA SESSION
+                HttpSession session = request.getSession(true);
                 session.setAttribute("userName", userName);
                 session.setAttribute("userEmail", login);
                 session.setAttribute("userPassword", password);
@@ -135,6 +141,8 @@ public class LoginController extends HttpServlet {
                 Double solde = dao.soldeClient(Integer.parseInt(password));
                 session.setAttribute("solde", solde);
                 session.setAttribute("codes", viewCodes(request));
+                
+                //MESSAGE D'ERREUR
             } else if (login.equals("nodata")) {
                 request.setAttribute("errorMessage", "Login/Password incorrect");
             } else if ("".equals(loginParam) || "".equals(passwordParam)) { // On positionne un message d'erreur pour l'afficher dans la JSP
@@ -144,11 +152,11 @@ public class LoginController extends HttpServlet {
             }
         }
 
-        // on créé un customer à partir de la BDD
+        
     }
 
     private void doLogout(HttpServletRequest request) {
-        // On termine la session
+        // FIN DE SESSION
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
